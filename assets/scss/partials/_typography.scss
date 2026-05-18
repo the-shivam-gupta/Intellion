@@ -1,0 +1,197 @@
+.ta__title {
+  font-family: $Bitter;
+  font-size: $xxl_title;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: 8px;
+
+  @media(max-width:576px) {
+    font-size: $xl_title;
+    letter-spacing: 3px;
+  }
+}
+
+
+.ta__h1 {
+  font-family: $Bitter;
+  font-size: $l_title;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.32;
+  letter-spacing: normal;
+
+  @media(max-width:576px) {
+    font-size: $xl;
+    line-height: 1.27;
+  }
+}
+
+.ta__h2 {
+  font-family: $Bitter;
+  font-size: $xxl;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.34;
+  letter-spacing: 1px;
+
+  @media(max-width:576px) {
+    font-size: $large;
+    line-height: 1.35;
+    letter-spacing: normal;
+  }
+}
+
+.ta__h3 {
+  font-family: $Bitter;
+  font-size: $medium-1;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.73;
+  letter-spacing: normal;
+
+  @media(max-width:576px) {
+    font-size: $medium-2;
+    line-height: 1.67;
+  }
+}
+
+.ta__h4 {
+  font-family: $Bitter;
+  font-size: $xs;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.71;
+  letter-spacing: normal;
+}
+
+.ta__h5 {
+  font-family: $Bitter;
+  font-size: $xxs;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: 1px;
+}
+
+.ta__h6 {
+  font-family: $SegoeUI;
+  font-size: $xs;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.29;
+  letter-spacing: normal;
+}
+
+.ta__para2 {
+  font-family: $Bitter;
+  font-size: $xs;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+}
+
+.ta__para {
+  font-family: $SegoeUI;
+  font-size: $small;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: $charcoal-grey;
+
+  & a{
+    font: inherit;
+    color: inherit;
+  }
+
+  @media(max-width:576px) {
+    font-size: $xs;
+    line-height: 1.71;
+
+  }
+}
+
+.ta__small {
+  font-family: $Bitter;
+  font-size: $xxs;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: 1px;
+}
+
+.ta__small2 {
+  font-family: $SegoeUI;
+  font-size: $xxs;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 2.5;
+  letter-spacing: 1px;
+}
+
+
+// Font color classes
+.heal-white {
+  color: $heal-white;
+}
+
+.pinkish-grey {
+  color: $pinkish-grey;
+}
+
+.very-light-pink {
+  color: $very-light-pink;
+}
+
+.grey-brown {
+  color: $grey-brown;
+}
+
+.purple-brown {
+  color: $purple-brown;
+}
+
+.brown-grey {
+  color: $brown-grey;
+}
+
+.dark {
+  color: $dark;
+}
+
+.charcoal-grey {
+  color: $charcoal-grey;
+}
+
+.grey-blue {
+  color: $grey-blue;
+}
+
+.off-white {
+  color: $off-white;
+}
+
+.orange {
+  color: $orange;
+}
+
+.kelly-green {
+  color: $kelly-green;
+}
+
+.turquoise-blue {
+  color: $turquoise-blue;
+}

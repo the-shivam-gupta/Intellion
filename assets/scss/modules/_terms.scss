@@ -1,0 +1,26 @@
+#terms,
+#privacy {
+  a {
+    color: $grey-brown;
+    @include prefixed(transition, color .2s ease 0s);
+
+    &:hover {
+      color: $pinkish-grey;
+    }
+  }
+
+  .ta__quest {
+    font-family: $Bitter;
+    font-size: 18px;
+    font-weight: 400;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.33;
+    letter-spacing: normal;
+    color: $charcoal-grey;
+  }
+
+  .ta__para {
+    margin-bottom: $spacing-m;
+  }
+}

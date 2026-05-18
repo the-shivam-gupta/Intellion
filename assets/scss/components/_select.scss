@@ -1,0 +1,108 @@
+.ta__multiselect {
+  width: 100%;
+  position: relative;
+
+  .selectbox {
+    position: relative;
+    border: 1px solid $grey-brown;
+
+    select {
+      width: 100%;
+      padding: 10px 15px;
+      background-color: transparent;
+      opacity: 0;
+
+      option {
+        @extend .ta__small;
+        color: $grey-brown;
+      }
+    }
+
+    .select-selected {
+      cursor: pointer;
+      user-select: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      padding: 10px 15px;
+      text-align: left;
+
+      @extend .ta__small;
+      color: $pinkish-grey;
+      text-transform: uppercase;
+
+      &:after {
+        position: absolute;
+
+      }
+    }
+
+    .overSelect {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      right: 0;
+      bottom: 0;
+      transform: translateY(-50%);
+      display: flex;
+      align-items: center;
+      padding: 10px 15px;
+
+      .selected-values {
+        @extend .ta__small;
+        color: $pinkish-grey;
+        text-align: left;
+        text-transform: uppercase;
+      }
+
+      .ta__close {
+        border: 1px solid $grey-brown;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background-color: transparent;
+      }
+    }
+  }
+
+  .ta__checkboxes {
+    display: none;
+    box-shadow: 0 2px 9px 0 rgba(0, 0, 0, 0.11);
+    background-color: $heal-white;
+    position: absolute;
+    z-index: 2;
+
+    &--group {
+      display: block;
+      justify-content: unset;
+      align-items: unset;
+      flex: unset;
+      padding: 30px 20px;
+
+      .custom-control {
+        width: 100%;
+        margin: 0 auto 30px auto !important;
+
+        &-label {
+          span {
+            @extend .ta__small;
+            color: $charcoal-grey;
+            text-transform: uppercase;
+          }
+        }
+
+        &-inline {
+          margin-right: 0;
+        }
+      }
+    }
+
+
+    label {
+      display: block;
+      text-align: left;
+    }
+  }
+}

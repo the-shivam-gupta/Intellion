@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56">
+    <g fill="none" fill-rule="evenodd">
+        <circle cx="28" cy="28" r="28" fill="#353D48"/>
+        <g>
+            <path fill="#B2B2B1" d="M20.925 0L15.5 4.986 15.5 14.863 20.925 9.877z" transform="translate(12 10.9)"/>
+            <path fill="#D9D9D9" d="M20.7 9.661L15.5 14.863 25.8 14.863 31 9.661z" transform="translate(12 10.9)"/>
+            <path fill="#1D1D1B" d="M20.925 0L20.925 9.644 20.925 9.661 20.953 9.661 30.92 9.661 31 9.661 31 0z" transform="translate(12 10.9)"/>
+            <path fill="#B2B2B1" d="M10.075 19.849L10.075 29.726 15.5 24.739 15.5 14.863z" transform="translate(12 10.9)"/>
+            <path fill="#D9D9D9" d="M5.2 14.863L0 20.065 10.3 20.065 15.5 14.863z" transform="translate(12 10.9)"/>
+            <path fill="#964091" d="M10.047 20.065L0.08 20.065 0 20.065 0 29.726 10.068 29.726 10.075 29.726 10.075 20.081 10.075 20.065z" transform="translate(12 10.9)"/>
+            <path fill="#7A6A58" d="M15.5 24.524L25.475 24.524 25.575 24.524 25.575 14.863 15.5 14.863z" transform="translate(12 10.9)"/>
+            <path fill="#CABB9F" d="M5.425 14.863L15.4 14.863 15.5 14.863 15.5 5.202 5.425 5.202z" transform="translate(12 10.9)"/>
+        </g>
+    </g>
+</svg>

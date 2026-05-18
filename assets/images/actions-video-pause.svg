@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="40px" height="40px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 64 (101010) - https://sketch.com -->
+    <title>E3DE4AB5-6143-42FA-A588-3632A5EA3489</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#606F83" offset="0.0897381757%"></stop>
+            <stop stop-color="#CBBBA0" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Actions/video/pause">
+            <rect id="Rectangle" stroke="url(#linearGradient-1)" x="0.5" y="0.5" width="39" height="39"></rect>
+            <path d="M17.8666667,12 L17.8666667,28 L16,28 L16,12 L17.8666667,12 Z M24.7333333,12 L24.7333333,28 L22.8666667,28 L22.8666667,12 L24.7333333,12 Z" id="Combined-Shape" fill="#CBBBA0"></path>
+        </g>
+    </g>
+</svg>

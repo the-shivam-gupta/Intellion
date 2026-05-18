@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="56px" height="56px" viewBox="0 0 56 56" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Icons/Project/Park</title>
+    <g id="Icons/Project/Park" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Square" transform="translate(12.000000, 10.899390)">
+            <polygon id="Fill-1" fill="#B2B2B1" points="20.925 0 15.5 4.9858829 15.5 14.8628049 20.925 9.8766533"></polygon>
+            <polygon id="Fill-2" fill="#D9D9D9" points="20.6996366 9.66082317 15.5 14.8628049 25.8000832 14.8628049 31 9.66082317"></polygon>
+            <polygon id="Fill-3" fill="#1D1D1B" points="20.925 0 20.925 9.64426626 20.925 9.66082317 20.9526808 9.66082317 30.9199723 9.66082317 31 9.66082317 31 0"></polygon>
+            <polygon id="Fill-4" fill="#B2B2B1" points="10.075 19.8487779 10.075 29.7256098 15.5 24.739368 15.5 14.8628049"></polygon>
+            <polygon id="Fill-5" fill="#D9D9D9" points="5.19991684 14.8628049 0 20.0647866 10.3000832 20.0647866 15.5 14.8628049"></polygon>
+            <polygon id="Fill-6" fill="#ec6608" points="10.0473192 20.0647866 0.0797536792 20.0647866 0 20.0647866 0 29.7256098 10.0684224 29.7256098 10.075 29.7256098 10.075 20.0813435 10.075 20.0647866"></polygon>
+            <polygon id="Fill-7" fill="#7A6A58" points="15.5 24.523628 25.4749653 24.523628 25.575 24.523628 25.575 14.8628049 15.5 14.8628049"></polygon>
+            <polygon id="Fill-8" fill="#CABB9F" points="5.425 14.8628049 15.4002367 14.8628049 15.5 14.8628049 15.5 5.20198171 5.425 5.20198171"></polygon>
+        </g>
+    </g>
+</svg>

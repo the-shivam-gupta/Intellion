@@ -1,0 +1,258 @@
+#sustainability-inner-page {
+    #sustainability-inner-banner {
+        .hero.transparent::before {
+            // background-image: linear-gradient(to bottom, #182331, rgb(54 73 96 / 0));
+            opacity: 0.74;
+        }
+    }
+    .sus_go_back_next_wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 10px;
+        a {
+            font-family: $Bitter;
+            font-size: 12px;              
+            font-weight: bold;              
+            font-stretch: normal;              
+            font-style: normal;              
+            line-height: normal;              
+            letter-spacing: 1px;              
+            color: $grey-brown;
+            display: flex;
+            align-items: center;
+            text-transform: uppercase;
+        }
+        .a_back {
+            svg {
+                margin-right: 20px;
+            }
+        }
+        .a_front {
+            @media (max-width: 768px) {
+                display: none;
+            }
+            svg {
+                margin-left: 20px;
+                transform: rotate(180deg);
+            }
+        }
+    }
+    #sus_contennt {
+        @media (max-width: 768px) {
+            padding: 40px 0 60px;
+        }
+        .sus_inner_title {
+            font-family: $Bitter;
+            font-size: 44px;          
+            font-weight: normal;          
+            font-stretch: normal;          
+            font-style: normal;          
+            line-height: 1.32;          
+            letter-spacing: normal;
+            color: $charcoal-grey;
+            margin-bottom: 9px;
+            @media (max-width: 768px) {
+                font-size: 30px;
+                margin-bottom: 10px;
+            }
+        }
+        .sus_inner_subtitle {
+            font-family: $SegoeUI;
+            font-size: 16px;          
+            font-weight: normal;          
+            font-stretch: normal;          
+            font-style: normal;          
+            line-height: 1.5;          
+            letter-spacing: normal;
+            color: $grey-blue;
+            margin-bottom: 40px;
+            @media (max-width: 768px) {
+                font-size: 14px;
+            }
+        }
+        .sus_feat_list {
+            .sus_feat_list_title {
+                font-family: $Bitter;
+                font-size: 12px;              
+                font-weight: bold;              
+                font-stretch: normal;              
+                font-style: normal;              
+                line-height: normal;              
+                letter-spacing: 1px;              
+                color: $grey-brown;
+                margin-bottom: 20px;
+                text-transform: uppercase;
+                @media (max-width: 768px) {
+                    margin-bottom: 10px;
+                }
+            }
+            .sus_feat_wrapper {
+                display: flex;
+                margin: 10px 0;
+                padding-right: 20px;
+                .feat_bullet {
+                    margin-right: 20px;
+                }
+                .sus_feat_info {
+                    font-family: $Bitter;
+                    font-size: 14px;                  
+                    font-weight: bold;                  
+                    font-stretch: normal;                  
+                    font-style: normal;                  
+                    line-height: 1.71;                  
+                    letter-spacing: normal;                  
+                    color: $charcoal-grey;
+                }
+            }
+        }
+    }
+
+    #certification {
+        .sus_certification_details {
+            .sus_cer_title {
+                font-family: $Bitter;
+                font-size: 32px;              
+                font-weight: normal;              
+                font-stretch: normal;              
+                font-style: normal;              
+                line-height: 1.34;              
+                letter-spacing: 1px;              
+                color: $charcoal-grey;
+                margin-bottom: 10px;
+                @media (max-width: 768px) {
+                    font-size: 26px;
+                }
+            }
+            .sus_cer_subtitle {
+                font-family: $SegoeUI;
+                font-size: 16px;              
+                font-weight: normal;              
+                font-stretch: normal;              
+                font-style: normal;              
+                line-height: 1.5;              
+                letter-spacing: normal;              
+                color: $grey-blue;
+                margin-bottom: 35px;
+                padding-right: 60px;
+                @media (max-width: 768px) {
+                    font-size: 14px;
+                    padding-right: 0;
+                }
+            }
+        }
+        .cer_logo_wrapper {
+            display: flex;
+            @media (max-width: 768px) {
+                margin-bottom: 23px;
+            }
+            .cer_logo {
+                width: 159px;
+                height: 159px;              
+                border: solid 1px $very-light-pink;
+                margin-bottom: 20px;
+                margin-right: 20px;
+                padding: 5px;
+                text-align: center;
+                display: flex;
+                // align-items: center;
+                justify-content: center;
+                @media (max-width: 768px) {
+                    width: 82px;
+                    height: 82px;
+                    flex-shrink: 0;
+                }
+                img {
+                    max-width: 100%;
+                }
+            }
+        }
+        .explore_desktop_btn {
+            @media (max-width: 768px) {
+                display: none;
+            }
+        }
+        .explore_mobile_btn {
+            display: none;
+            @media (max-width: 768px) {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                .next_project {
+                    font-family: $Bitter;
+                    font-size: 12px;              
+                    font-weight: bold;              
+                    font-stretch: normal;              
+                    font-style: normal;              
+                    line-height: normal;              
+                    letter-spacing: 1px;              
+                    color: $grey-brown;
+                    display: flex;
+                    align-items: center;
+                    text-transform: uppercase;
+                    svg {
+                        margin-left: 20px;
+                        transform: rotate(180deg);
+                    }
+                }
+            }
+            @media (max-width: 354px) {
+                .ta__btn {
+                    padding: 15px 20px;
+                }
+                .next_project {
+                    font-size: 10px;
+                    svg {
+                        margin-left: 10px !important;
+                    }
+                }
+            }
+        }
+    }
+
+    #sus_inner_quotes {
+        background-color: $charcoal-grey;
+        padding: 68px 0;
+        margin-top: 50px;
+        @media (max-width: 768px) {
+            margin-top: 50px;
+            padding: 20px 0;
+        }
+        .quotes_wrapper {
+            display: flex;
+            @media (max-width: 768px) {
+                padding: 30px 0;
+                display: block;
+            }
+            .sus_quotes_img {
+                margin-right: 20px;
+                @media (max-width: 768px) {
+                    margin-bottom: 15px;
+                    img {
+                        width: 39px;
+                    }
+                }
+            }
+            .sus_quotes_info {
+                font-family: $Bitter;
+                font-size: 22px;              
+                font-weight: bold;              
+                font-stretch: normal;              
+                font-style: normal;              
+                line-height: 1.73;              
+                letter-spacing: normal;              
+                color: $heal-white;
+                margin-bottom: 40px;
+                @media (max-width: 768px) {
+                    font-size: 18px; 
+                }
+            }
+            .testimonial_logo {
+                img {
+                    max-width: 100%;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,27 @@
+image: atlassian/default-image:latest
+
+pipelines:
+  branches:
+    development:
+    - step:
+        deployment: test
+        script:
+        - echo "Dev Deployment script started"
+        - ssh user@3.7.206.48 'bash tata-intellion-frontend-deploy.sh'
+        - echo "Dev Deployment script finished"
+
+    uat:
+    - step:
+        deployment: staging
+        script:
+          - echo "UAT Deployment script started"
+          - ssh ec2-user@3.0.190.213 'bash /var/www/vhosts/Intellion/tata-intellion-frontend-deploy.sh'
+          - echo "UAT Deployment script finished"
+
+    live:
+    - step:
+        deployment: production
+        script:
+          - echo "Production Deployment script started"
+          - ssh ec2-user@52.221.2.125 'bash /var/www/vhosts/Intellion/tata-intellion-frontend-deploy.sh'
+          - echo "Production Deployment script finished"

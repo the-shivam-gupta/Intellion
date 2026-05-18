@@ -1,0 +1,214 @@
+#about-page {
+  #history {
+    margin-top: 0;
+
+    .section {
+      &__heading {
+        margin-bottom: $spacing-xl;
+
+        @media (max-width: 576px) {
+          margin-bottom: $spacing-s;
+        }
+      }
+
+      &__content {
+        margin-bottom: 0;
+
+        @media (max-width: 576px) {
+          margin-top: $spacing-xl;
+        }
+
+        strong {
+          font-weight: bolder;
+          font-family: $Bitter;
+        }
+
+        p {
+          @extend .ta__para;
+          color: $grey-blue;
+          margin-bottom: $spacing-xl;
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+
+        b {
+          @extend .ta__para2;
+        }
+      }
+    }
+  }
+
+  #partners {
+    .section__content {
+      width: 75%;
+
+      @media (max-width: 768px) {
+        width: 100%;
+      }
+    }
+  }
+
+  #partner-slider {
+    margin-top: -90px;
+
+    @media (max-width: 1024px) {
+      margin-top: 0;
+    }
+
+    .nav-tabs {
+      border: none;
+
+      .nav-item {
+        border: none;
+
+        &:first-child {
+          a {
+            padding-left: 0;
+          }
+        }
+
+        .nav-link {
+          text-decoration: none;
+          @extend .ta__h5;
+          text-transform: uppercase;
+          color: $pinkish-grey;
+          border: none;
+          @include prefixed(transition, color 0.2s ease 0s);
+
+          &.active {
+            border: none;
+            color: $grey-brown;
+          }
+
+          &:hover {
+            text-decoration: none;
+            color: $grey-brown;
+          }
+        }
+      }
+    }
+
+    .tab-content {
+      padding-top: $spacing-xxl-8;
+      margin: 0 auto;
+
+      @media (max-width: 1024px) {
+        padding-top: $spacing-s;
+      }
+
+      .slick-dots {
+        bottom: -65px !important;
+        text-align: left !important;
+      }
+    }
+  }
+
+  #advantage {
+    @media (max-width: 768px) {
+      margin: $spacing-xxl 0 0 0;
+    }
+  }
+
+  #projects {
+    padding-bottom: 150px;
+
+    @media (max-width: 576px) {
+      padding-bottom: 25px;
+    }
+
+    .section__btn {
+      margin-top: $spacing-m;
+
+      @media (max-width: 768px) {
+        margin-bottom: $spacing-xxl-2;
+      }
+
+      .ta__btn {
+        @media (max-width: 576px) {
+          margin: 0;
+        }
+      }
+    }
+
+    #work-slider {
+      .partial__slider {
+        overflow: hidden;
+        .wrapper {
+          position: relative;
+          margin-left: calc((100% - 1140px)/2);
+          max-width: 460px;
+          @media (max-width: 992px) {
+            margin-left: calc((100% - 960px)/2);
+          }
+          @media (max-width: 768px) {
+            margin-left: calc((100% - 720px)/2);
+          }
+          @media (max-width: 576px) {
+            margin-left: 0;
+          }
+        }
+        .swiper-container {
+          // margin: 0 auto;
+          // position: relative;
+          overflow: visible;
+          // list-style: none;
+          // padding: 0;
+          // z-index: 1;
+        }
+        .ta__card {
+          margin: 0 10px;
+
+          @media (max-width: 576px) {
+            margin: 0;
+          }
+        }
+      }
+    }
+  }
+
+  #key-persons {
+    .section__image {
+      @media (max-width: 768px) {
+        display: none;
+      }
+      overflow: hidden;
+
+      img {
+        transition-duration: 1.5s !important;
+        &:hover {
+          transform: scale(1.1) !important;
+          -webkit-transform: scale(1.1) !important;
+          -moz-transform: scale(1.1) !important;
+          z-index: 2;
+        }
+      }
+    }
+
+    .section__btn {
+      @media (max-width: 768px) {
+        margin-bottom: 0;
+      }
+
+      .ta__btn {
+        @media (max-width: 576px) {
+          margin: 0;
+        }
+      }
+    }
+
+    .section__content {
+      .section__image {
+        display: none;
+
+        @media (max-width: 768px) {
+          display: block;
+          height: 225px;
+          width: 100%;
+          margin: $spacing-m 0;
+        }
+      }
+    }
+  }
+}

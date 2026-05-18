@@ -1,0 +1,229 @@
+#thank-you {
+  .thank-you {
+    min-height: 60vh;
+  }
+}
+
+#error-page {
+  .thank-you {
+    min-height: 60vh;
+    padding: 120px 0;
+    position: relative;
+
+    @media (max-width: 1024px) {
+      min-height: 70vh;
+    }
+
+    @media (max-width: 768px) {
+      min-height: 60vh;
+    }
+
+    @media (max-width: 576px) {
+      min-height: 70vh;
+    }
+  }
+  .error-section {
+    background-color: $off-white;
+    text-align: center;
+  }
+
+  .section__title {
+    font-size: 140px;
+
+    @media (max-width: 576px) {
+      font-size: 70px;
+    }
+  }
+  .cust_row {
+    align-items: center;
+  }
+  .four_zero_four_text {
+    @media (max-width: 768px) {
+      margin-bottom: 20px;
+    }
+    img {
+      max-width: 330px;
+      @media (max-width: 768px) {
+        max-width: 250px;
+      }
+    }
+  }
+  .page_not_exist_wrapper {
+    text-align: left;
+    @media (max-width: 768px) {
+      text-align: center;
+    }
+    .pg_nt_title {
+      font-family: $Bitter;
+      font-size: 44px;
+      font-weight: normal;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 1.32;
+      letter-spacing: normal;
+      color: $charcoal-grey;
+      margin-bottom: 10px;
+      @media (max-width: 768px) {
+        font-size: 30px;
+      }
+    }
+    .pg_nt_subtitle {
+      font-family: $Bitter;
+      font-size: 14px;
+      font-weight: bold;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 1.71;
+      letter-spacing: normal;
+      color: $grey-brown;
+      margin-bottom: 30px;
+    }
+  }
+
+  .projects-section {
+    padding: 100px 0;
+    @media (max-width: 768px) {
+      padding: 60px 0;
+    }
+    .all_proj_mob_btn {
+      display: none;
+      @media (max-width: 768px) {
+        display: block;
+        max-width: 137px;
+        margin: 0 auto 50px;
+      }
+    }
+    .all_proj_desk_btn {
+      @media (max-width: 768px) {
+        display: none;
+      }
+    }
+    .slick_wrapper {
+      // margin-bottom: 100px;
+      @media (max-width: 768px) {
+        // margin-bottom: 50px;
+        padding: 0 10px;
+        .primary {
+          margin-bottom: 50px;
+        }
+      }
+    }
+    .news_type {
+      align-items: flex-start;
+    }
+    .news_type_title {
+      color: #363e4a;
+    }
+    .nt_view {
+      padding-right: 40px;
+      position: relative;
+
+      @media (max-width: 768px) {
+        padding-right: 25px;
+      }
+
+      a,
+      button {
+        font-family: $Bitter;
+        font-size: 12px;
+        font-weight: bold;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: 1px;
+        text-align: right;
+        color: $grey-brown;
+        text-transform: uppercase;
+        background-color: transparent;
+
+        @media (max-width: 330px) {
+          font-size: 10px;
+        }
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        top: 13px;
+        right: 0;
+        width: 30px;
+        height: 2px;
+        background-color: $grey-brown;
+
+        @media (max-width: 768px) {
+          width: 20px;
+        }
+      }
+    }
+    .news_type_subtitle {
+      font-family: $SegoeUI;
+      font-size: 16px;
+      font-weight: normal;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 1.5;
+      letter-spacing: normal;
+      color: $grey-blue;
+      margin-top: 5px;
+      width: 75%;
+      @media (max-width: 768px) {
+        width: 100%;
+        margin-bottom: 30px;
+      }
+    }
+  }
+}
+
+.thank-you {
+  background-color: $off-white;
+  text-align: center;
+
+  .section__title {
+    @extend .ta__h1;
+    margin: 0 auto $spacing-m auto;
+    width: 45%;
+
+    @media (max-width: 576px) {
+      width: 75%;
+      margin: 0 auto $spacing-xs auto;
+    }
+  }
+
+  .ta__h3 {
+    color: $grey-brown;
+    margin-bottom: $spacing-xs;
+  }
+
+  .section__content {
+    width: 40%;
+    margin: 0 auto;
+
+    @media (max-width: 768px) {
+      width: 50%;
+    }
+
+    @media (max-width: 576px) {
+      width: 100%;
+    }
+
+    p {
+      a {
+        color: $charcoal-grey;
+        font-weight: bold;
+        @include prefixed(transition, color 0.2s ease 0s);
+
+        &:hover {
+          color: $grey-brown;
+        }
+      }
+    }
+
+    .ta__btn {
+      margin: $spacing-m auto 0 auto;
+
+      @media (max-width: 576px) {
+        margin: $spacing-xl auto 0 auto;
+      }
+    }
+  }
+}

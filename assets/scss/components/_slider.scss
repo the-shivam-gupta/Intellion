@@ -1,0 +1,365 @@
+.full__slider {
+  position: relative;
+  margin-top: $spacing-xxl-4;
+
+  @media(max-width:576px) {
+    margin-top: 0;
+  }
+
+  .slick-track {
+    display: flex;
+  }
+
+  .slick-slide {
+    margin: 0 10px;
+    width: 690px !important;
+
+    @media (max-width: 1024px) {
+      width: 630px !important;
+    }
+
+    @media (max-width: 768px) {
+      width: 475px !important;
+    }
+
+    @media (max-width: 576px) {
+      max-width: 335px !important;
+      height: 210px;
+      width: 100% !important;
+      margin: 0 5px !important;
+    }
+  }
+
+  .carousel__image {
+    max-width: 690px !important;
+    height: 435px;
+
+    .ta__card {
+      width: 100%;
+      height: 100%;
+
+      &--image {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      width: 630px !important;
+    }
+
+    @media (max-width: 768px) {
+      width: 475px !important;
+    }
+
+    @media (max-width: 576px) {
+      max-width: 335px !important;
+      height: 210px;
+      width: 100% !important;
+      margin: 0 5px !important;
+    }
+  }
+
+  .slick-dots {
+    bottom: -45px !important;
+  }
+}
+
+.fit__slider {
+  width: calc(100% - 150px);
+  margin: 0 auto;
+
+  @media(max-width:1024px) {
+    width: 100%;
+  }
+
+  .slick-track {
+    display: flex;
+  }
+
+  .slick-slide {
+    margin: 0 20px;
+    max-width: 160px !important;
+    height: 160px;
+
+    @media(max-width:768px) {
+      max-width: 120px !important;
+      height: 120px;
+    }
+
+    @media(max-width:576px) {
+      margin: 0 10px;
+      max-width: 75px !important;
+      height: 75px;
+    }
+
+    .ta__card {
+      width: 100%;
+      height: 100%;
+      border: 1px solid $very-light-pink;
+    }
+  }
+
+  .carousel-prev {
+    left: -70px;
+  }
+
+  .carousel-next {
+    right: -70px;
+  }
+
+  .carousel__image {
+    width: 160px !important;
+    height: 160px;
+
+    @media(max-width:768px) {
+      max-width: 120px !important;
+      height: 120px;
+    }
+
+    @media(max-width:576px) {
+      max-width: 75px !important;
+      height: 75px;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 0 12px;
+    }
+  }
+}
+
+.partial__slider {
+  .hide-sm {
+    @media(max-width: 576px) {
+      display: none;
+    }
+  }
+
+  .show-sm {
+    display: none;
+
+    @media(max-width: 576px) {
+      display: block;
+    }
+  }
+
+  // .wrapper {
+  //   // overflow-x: hidden;
+  //   // transform: translateX(calc(100vw - 1140px));
+  //   width: calc(100% + ((100vw - 1140px)/2));
+
+  //   @media(max-width:1024px) {
+  //     // transform: translateX(calc(100vw - 960px));
+  //     width: calc(100% + ((100vw - 960px)/2));
+  //   }
+
+  //   @media(max-width:768px) {
+  //     // transform: translateX(calc(100vw - 720px));
+  //     width: calc(100% + ((100vw - 720px)/2));
+  //   }
+
+  //   @media(max-width:577px) {
+  //     // transform: translateX(calc(100vw - 540px));
+  //     width: calc(100% + ((100vw - 540px)/2));
+  //   }
+
+  //   @media(max-width:576px) {
+  //     width: 100%;
+  //   }
+  // }
+
+  .slick-dots {
+    width: auto;
+    text-align: right;
+    right: 15px;
+    top: unset;
+    bottom: -65px;
+    z-index: 1;
+  }
+
+  .slick-arrow {
+    top: unset;
+    bottom: -90px;
+
+    &.carousel-next {
+      left: 67px;
+    }
+
+    &.carousel-prev {
+      left: 12px;
+    }
+  }
+
+  .slick-current,
+  .swiper-slide-active {
+    .hoverImage {
+      border: solid 1px $charcoal-grey;
+
+      .non-hovered {
+        opacity: 0;
+      }
+
+      .hovered {
+        opacity: 1;
+      }
+
+      .ta__card--image {
+        opacity: 1;
+      }
+
+      .ta__card--title {
+        color: $heal-white;
+      }
+
+      .ta__card--text {
+        color: $heal-white;
+      }
+
+      &:before {
+        background-color: rgba(53, 62, 74, 0.9);
+      }
+    }
+  }
+
+  .navigation {
+    position: relative;
+    width: 50%;
+    margin-left: -5px;
+
+    @media(max-width: 1204px) {
+      display: none;
+    }
+
+    .carousel-next {
+      left: 60px;
+    }
+
+    .carousel-prev {
+      left: 0;
+    }
+
+    .carousel-button {
+      position: absolute;
+      bottom: 0;
+      width: 40px !important;
+      height: 40px !important;
+      cursor: pointer;
+      background-color: #F2E6CE;
+      outline: none;
+      border: none;
+      box-shadow: none;
+      z-index: 1;
+      @include prefixed(transition, background-position .3s);
+      background-size: 100% 200%;
+      background-image: linear-gradient(180deg, #F9F3E7 50%, #F2E6CE 0);
+      background-position: 0 -100%;
+
+      .ta__icon {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 12px;
+        color: $grey-brown;
+
+        &:before {
+          color: $grey-brown;
+        }
+      }
+
+      &:hover {
+        background-position: 0 0;
+        background-color: #F9F3E7;
+
+        .ta__icon {
+          color: $pinkish-grey;
+        }
+      }
+
+      &:focus {
+        background-position: 0 0;
+        background-color: $grey-brown;
+
+        .ta__icon {
+          color: $pinkish-grey;
+        }
+      }
+
+    }
+  }
+
+  .swiper-slide {
+    min-width: 455px;
+    min-height: 290px;
+  }
+
+  .custom-dots {
+    height: 60px;
+    position: relative;
+    width: 50%;
+
+    @media(max-width: 1204px) {
+      width: 100%;
+    }
+  }
+
+  .swiper-pagination {
+    z-index: 2;
+
+    &-bullets {
+      bottom: 0;
+      opacity: 1;
+      right: 0;
+    }
+
+
+
+    &-bullet {
+      opacity: 1 !important;
+      width: 18px !important;
+      height: 18px !important;
+      border-radius: 50%;
+      background-color: transparent !important;
+      position: relative;
+      margin-left: 20px;
+
+      &:before {
+        content: '' !important;
+        color: #efeae2 !important;
+        opacity: 1 !important;
+        width: 8px !important;
+        height: 8px !important;
+        border-radius: 50%;
+        background-color: #efeae2 !important;
+        position: absolute;
+        top: 50% !important;
+        left: 50% !important;
+        @include prefixed(transform, translate(-50%, -50%) !important);
+      }
+
+      &-active {
+        background-color: #efeae2 !important;
+
+        &:before {
+          color: $grey-brown !important;
+          background-color: $grey-brown !important;
+        }
+      }
+    }
+  }
+}
+
+.slider__nav {
+  .slick-slide{
+    padding: 0 5px;
+  }
+  
+  .slick-current{
+    img{
+      border: 5px solid $grey-brown;
+    }
+  }
+}

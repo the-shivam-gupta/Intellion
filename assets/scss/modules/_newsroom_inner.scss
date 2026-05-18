@@ -1,0 +1,147 @@
+#newsroom-inner-page {
+    margin-top: 180px;
+    @media (max-width: 768px) {
+        margin-top: 125px;
+    }
+    .section-newsroom-inner {
+        padding-bottom: 50px;
+    }
+    .news_back {
+        font-family: $Bitter;
+        font-size: 12px;
+        font-weight: bold;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: 1px;
+        color: $grey-brown;
+        margin-bottom: 40px;
+        @media (max-width: 768px) {
+            margin-bottom: 27px;
+        }
+        a {
+            display: flex;
+            align-items: center;
+            color: $grey-brown;
+            svg {
+                margin-right: 20px;
+            }
+        }
+    }
+    .social_links_wrapper {
+        margin-top: 14px;
+        position: sticky;
+        top: 100px;
+        @media (max-width: 767px) {
+            display: none;
+        }
+        a {
+            .social_icon {
+                width: 40px;
+                height: 40px;
+                border: solid 0.5px $pinkish-grey;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+    }
+    .news_wrapper {
+        h4 {
+            font-family: $Bitter;
+            font-size: 44px;          
+            font-weight: normal;          
+            font-stretch: normal;          
+            font-style: normal;          
+            line-height: 1.32;          
+            letter-spacing: normal;          
+            color: $charcoal-grey;
+            margin-bottom: 14px;
+            @media (max-width: 768px) {
+                font-size: 30px;
+                margin-bottom: 20px;
+            }
+        }
+        h6 {
+            font-family: $SegoeUI;
+            font-size: 12px;          
+            font-weight: normal;          
+            font-stretch: normal;          
+            font-style: normal;          
+            line-height: 1.83;          
+            letter-spacing: 1px;          
+            color: $grey-blue;
+            margin-bottom: 32px;
+            text-transform: uppercase;
+            @media (max-width: 768px) {
+                margin-bottom: 20px;
+            }
+        }
+        p {
+            font-family: $SegoeUI;
+            font-size: 16px;          
+            font-weight: normal;          
+            font-stretch: normal;          
+            font-style: normal;          
+            line-height: 1.75;          
+            letter-spacing: normal;          
+            color: $charcoal-grey;
+            margin-bottom: 25px;
+            @media (max-width: 768px) {
+                font-size: 14px;
+            }
+            a{
+                font: inherit;
+                color: inherit;
+            }
+        }
+        h5 {
+            font-family: $Bitter;
+            font-size: 22px;          
+            font-weight: bold;          
+            font-stretch: normal;          
+            font-style: normal;          
+            line-height: 1.73;          
+            letter-spacing: normal;          
+            color: $charcoal-grey;
+            margin-bottom: 20px;
+            @media (max-width: 768px) {
+                font-size: 18px;
+            }
+        }
+        img {
+            margin-bottom: 25px;
+            max-width: 100%;
+            height: auto;
+            @media (max-width: 768px) {
+                margin-bottom: 20px;
+            }
+        }
+        .wp-video {
+            max-width: 100% !important;
+        }
+        video {
+            max-width: 100%;
+        }
+    }
+    .social_links_wrapper_mob {
+        display: flex;
+        margin-bottom: 20px;
+        @media (min-width: 768px) {
+            display: none;
+        }
+        a {
+            .social_icon {
+                width: 40px;
+                height: 40px;
+                border: solid 0.5px $pinkish-grey;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                img {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+}

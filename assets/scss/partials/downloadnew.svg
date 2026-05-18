@@ -1,0 +1,19 @@
+<svg width="12px" height="16px" viewBox="0 0 12 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 64 (93537) - https://sketch.com -->
+    <title>Shape</title>
+    <desc>Created with Sketch.</desc>
+    <g id="About-Us" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Profile_leadership-team" transform="translate(-268.000000, -652.000000)">
+            <rect id="Rectangle" fill="#000000" opacity="0.33203125" x="0" y="0" width="1440" height="900"></rect>
+            <rect id="Rectangle" fill="#CBBBA0" x="0" y="100" width="1440" height="704"></rect>
+            <g id="Bio" transform="translate(134.000000, 216.000000)">
+                <g id="social" transform="translate(0.000000, 424.000000)">
+                    <g id="download" transform="translate(120.000000, 0.000000)">
+                        <path d="M22.6666667,19.3333333 L26,19.3333333 L20,26 L14,19.3333333 L17.3333333,19.3333333 L17.3333333,12 L22.6666667,12 L22.6666667,19.3333333 Z M23.3333333,26.6666667 L16.6666667,26.6666667 L16.6666667,28 L23.3333333,28 L23.3333333,26.6666667 Z" id="Shape" fill="#353E4A" fill-rule="nonzero"></path>
+                        <rect id="Rectangle-Copy-2" stroke="#606F83" x="0.5" y="0.5" width="39" height="39"></rect>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

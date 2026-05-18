@@ -1,0 +1,170 @@
+#csr-page {
+    // padding-bottom: 106px;
+    @media (max-width: 768px) {
+        padding-bottom: 73px;
+    }
+    .hero {
+        padding: 50px 0 66px 0;
+        height: auto;
+        .section__title {
+            @extend .ta__h1;
+            color: $pinkish-grey;
+        }
+        .section__desc {
+            @media (max-width: 768px) {
+                font-size: 16px;
+                line-height: 1.5;
+            }
+        }
+    }
+    .pagination_wrapper {
+        border-top: solid 1px $pinkish-grey;
+        padding-top: 25px;
+        margin-top: 40px;
+        margin-bottom: 60px;
+        @media (max-width: 768px) {
+            margin-top: 25px;
+        }
+        .pagination {
+            justify-content: flex-end;
+            align-items: center;
+            li:first-child {
+                button {
+                    padding-left: 0;
+                }
+                span {
+                    padding-left: 0;
+                }
+            }
+            li:last-child {
+                button {
+                    padding-right: 0;
+                }
+                span {
+                    padding-right: 0;
+                }
+            }
+            @media (max-width: 768px) {
+                justify-content: center;
+            }
+            li {
+                button {
+                    border: none;
+                    background-color: transparent;
+                    font-family: $Bitter;
+                    font-size: 14px;
+                    font-weight: normal;
+                    font-stretch: normal;
+                    font-style: normal;
+                    line-height: normal;
+                    letter-spacing: 2px;
+                    text-align: center;
+                    color: $pinkish-grey;
+                    &:focus {
+                        box-shadow: none !important;
+                    }
+                }
+            }
+            li.active {
+                button {
+                    font-weight: bold;
+                    letter-spacing: normal;
+                    color: $grey-brown;
+                    margin-top: -2px;
+                }
+            }
+            li.disabled {
+                span {
+                    // padding: 0;
+                    border: none;
+                }
+            }
+        }
+    }
+}
+.section-csr {
+    background-color: $off-white;
+    padding: 28px 10px;
+    margin-bottom: 50px;
+    @media (max-width: 768px) {
+        padding: 20px 10px 15px;
+        margin-bottom: 40px;
+    }
+}
+.csr_filter_wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    @media (max-width: 768px) {
+        display: block;
+    }
+    .sust_back_title {
+        font-family: $Bitter;
+        font-size: 12px;
+        font-weight: bold;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: 1px;
+        color: $grey-brown;
+        @media (max-width: 768px) {
+            margin-bottom: 20px;
+        }
+        a {
+            display: flex;
+            align-items: center;
+            color: $grey-brown;
+            svg {
+                margin-right: 20px;
+            }
+        }
+    }
+    .filter_dropdown {
+        display: flex;
+        @media (max-width: 768px) {
+            justify-content: space-between;
+            .dropdown-menu {
+                min-width: 9rem;
+            }
+        }
+        .ta__dropdown {
+            margin-left: 21px;
+            min-width: 220px;
+            max-width: 100%;
+            @media (max-width: 768px) {
+                margin-left: 0px;
+                min-width: auto;
+                max-width: 48%;
+            }
+            button {
+                color: #7a6958 !important;
+                font-weight: bold;
+                &::after {
+                    color: #7a6958 !important;
+                }
+                &:active {
+                    background-color: transparent !important;
+                }
+            }
+            .dropdown-toggle {
+                position: absolute;
+                top: 0;
+                right: 0;
+                // z-index: 9;
+                display: block;
+                height: 100%;
+                width: 100%;
+            }
+            ul {
+                li {
+                    width: 100%;
+                }
+            }
+
+            @media (min-width: 525px) and (max-width: 768px) {
+                max-width: 50%;
+            }
+        }
+    }
+}

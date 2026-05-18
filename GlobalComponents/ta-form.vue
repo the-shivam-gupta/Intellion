@@ -1,0 +1,367 @@
+<template>
+  <b-form @submit="submit" autocomplete="off">
+    <div class="row">
+      <!-- full name -->
+      <div class="col-lg-12">
+        <div
+          class="form-group"
+          :class="[{ 'error-box': errors.fullname !== null },{isIos: $device.isIos}
+          ]"
+        >
+          <label
+            for="fullname"
+            :class="{active: isHighlight === 'fullname' || enquireForm.fullname !== ''}"
+            @click="autoFocusInput('fullname')"
+          >FULL NAME*</label>
+          <b-form-input
+            v-model="enquireForm.fullname"
+            id="fullname"
+            type="text"
+            name="fullname"
+            aria-label="Your full name"
+            data-placeholder="FULL NAME*"
+            @focus="isHighlight = 'fullname'"
+            @keyup="isValidForm('fullname')"
+          ></b-form-input>
+          <span for="fullname_error" class="error">{{ errors.fullname }}</span>
+        </div>
+      </div>
+
+      <!-- email -->
+      <div class="col-lg-12">
+        <div
+          class="form-group"
+          :class="[{ 'error-box': errors.email !== null },{isIos: $device.isIos}]"
+        >
+          <label
+            for="email"
+            :class="{active: isHighlight === 'email' || enquireForm.email !== ''}"
+            @click="autoFocusInput('email')"
+          >EMAIL*</label>
+          <b-form-input
+            v-model="enquireForm.email"
+            id="email"
+            type="email"
+            name="email"
+            aria-label="Your Email"
+            data-placeholder="EMAIL*"
+            @focus="isHighlight = 'email'"
+            @keyup="isValidForm('email')"
+          ></b-form-input>
+          <span for="email_error" class="error">{{ errors.email }}</span>
+        </div>
+      </div>
+      <!-- phone -->
+      <div class="col-lg-12">
+        <div
+          class="form-group"
+          :class="[{ 'error-box': errors.phone !== null },{isIos: $device.isIos}]"
+        >
+          <label
+            for="phone"
+            :class="{active: isHighlight === 'phone' || enquireForm.phone !== ''}"
+            @click="autoFocusInput('phone')"
+          >Phone NUmber*</label>
+          <b-form-input
+            v-model="enquireForm.phone"
+            id="phone"
+            type="tel"
+            name="phone"
+            aria-label="Your Phone"
+            data-placeholder="Phone NUmber*"
+            @focus="isHighlight = 'phone'"
+            @keyup="isValidForm('phone')"
+          ></b-form-input>
+          <span for="phone_error" class="error">{{ errors.phone }}</span>
+        </div>
+      </div>
+
+      <!-- city -->
+      <div class="col-lg-12" v-if="from === 'enquire'">
+        <div
+          class="form-group"
+          :class="[{ 'error-box': errors.city !== null },{isIos: $device.isIos}]"
+        >
+          <label
+            style="transform: unset;
+    top: -20px;"
+            :style="{ display:$device.isIos?'none':'inline-block' }"
+          >Select City*</label>
+          <b-dropdown split id="dropdown-city" :text="cityLabel" class="ta__dropdown">
+            <b-dropdown-item
+              v-for="(city,index) in cities"
+              :key="'city-'+index"
+              @click="setCityLabel(city)"
+            >{{city.label}}</b-dropdown-item>
+          </b-dropdown>
+          <!-- <span for="city_error" class="error">{{ errors.city }}</span> -->
+        </div>
+      </div>
+
+      <!-- project -->
+      <div class="col-lg-12" v-if="from === 'enquire'">
+        <div
+          class="form-group"
+          :class="[{ 'error-box': errors.project !== null },{isIos: $device.isIos}]"
+        >
+          <label
+            style="transform: unset;
+    top: -20px;"
+            :style="{ display:$device.isIos?'none':'inline-block' }"
+          >Project Interested*</label>
+          <b-dropdown split id="dropdown-project" :text="projectLabel" class="ta__dropdown">
+            <b-dropdown-item
+              v-for="(project,index) in projects"
+              :key="'project-'+index"
+              @click="setProjectLabel(project)"
+            >{{project.label}}</b-dropdown-item>
+          </b-dropdown>
+          <!-- <span for="project_error" class="error">{{ errors.project }}</span> -->
+        </div>
+      </div>
+
+      <!-- message -->
+      <div class="col-lg-12">
+        <div
+          class="form-group"
+          :class="[{ 'error-box': errors.message !== null },{isIos: $device.isIos}]"
+        >
+          <label
+            for="message"
+            :class="{active: isHighlight === 'message' || enquireForm.message !== ''}"
+            @click="autoFocusInput('message')"
+          >MESSAGE (LIMIT 150 Words)*</label>
+          <b-form-textarea
+            v-model="enquireForm.message"
+            id="message"
+            type="text"
+            name="message"
+            value="message"
+            aria-label="Message"
+            data-placeholder="MESSAGE (LIMIT 150 Words)*"
+            @focus="isHighlight = 'message'"
+            @keyup="isValidForm('message')"
+          ></b-form-textarea>
+          <span for="message_error" class="error">{{ errors.message }}</span>
+        </div>
+      </div>
+      <div class="col-lg-12">
+        <!-- <ta-cta btnStyle="ta__btn--primary" type="submit" text="submit"></ta-cta> -->
+        <button class="ta__btn ta__btn--primary" id="btn__enquire__submit" :disabled="!isValid">submit</button>
+      </div>
+    </div>
+  </b-form>
+</template>
+<script>
+import {
+  isNotEmpty,
+  validateName,
+  validateEmail,
+  validateNumber,
+  autoFocusInput,
+} from "~/middleware/utils";
+export default {
+  props: {
+    from: String,
+  },
+  data() {
+    return {
+      isHighlight: false,
+      isValid: false,
+      countryLabel: "India",
+      cityLabel: "Mumbai",
+      projectLabel: "Square",
+      selectedProject: "square",
+      cities: [
+        { label: "Mumbai", value: "mumbai" },
+        { label: "Gurugram", value: "gurugram" },
+        { label: "Chennai", value: "chennai" },
+        { label: "Navi Mumbai", value: "navi-mumbai" },
+      ],
+      projects: [{ label: "Square", value: "square" }],
+      errors: {
+        fullname: null,
+        email: null,
+        country: null,
+        city: null,
+        project: null,
+        phone: null,
+        message: null,
+      },
+      enquireForm: {
+        fullname: "",
+        email: "",
+        country: "",
+        city: "mumbai",
+        project: "square",
+        phone: "",
+        message: "",
+      },
+    };
+  },
+  methods: {
+    autoFocusInput: autoFocusInput,
+    submit: function (e) {
+      e.preventDefault();
+      if (
+        !isNotEmpty(this.enquireForm.fullname) ||
+        !validateEmail(this.enquireForm.email) ||
+        !validateNumber(this.enquireForm.phone) ||
+        !isNotEmpty(this.enquireForm.message)
+      ) {
+        //validate name
+        if (!isNotEmpty(this.enquireForm.fullname)) {
+          this.errors.fullname = "Please enter name";
+        } else if (!validateName(this.enquireForm.fullname)) {
+          this.errors.fullname = "Name should contain alphabets only";
+        } else {
+          this.errors.fullname = null;
+        }
+
+        //validate message
+        if (!isNotEmpty(this.enquireForm.message)) {
+          this.errors.message = "Please enter message";
+        } else if (this.enquireForm.message.length > 150) {
+          this.errors.message = "Message Limit in 150 characters";
+        } else {
+          this.errors.message = null;
+        }
+
+        //email validation
+        if (!isNotEmpty(this.enquireForm.email)) {
+          this.errors.email = "Please enter your email";
+        } else if (!validateEmail(this.enquireForm.email)) {
+          this.errors.email = "Please enter a valid email ";
+        } else {
+          this.errors.email = null;
+        }
+
+        //phone validation
+        if (!isNotEmpty(this.enquireForm.phone)) {
+          this.errors.phone = "Please enter your phone number";
+        } else if (!validateNumber(this.enquireForm.phone)) {
+          this.errors.phone = "Please enter a valid phone number";
+        } else {
+          this.errors.phone = null;
+        }
+      } else {
+        this.errors = {
+          fullname: null,
+          email: null,
+          country: null,
+          phone: null,
+          message: null,
+        };
+        let payload = {
+          full_name: this.enquireForm.fullname,
+          email: this.enquireForm.email,
+          number: this.enquireForm.phone,
+          city: this.enquireForm.city,
+          project: this.enquireForm.project,
+          message: this.enquireForm.message,
+        };
+        // this.isValid = true;
+        this.$store.dispatch("submitEnquiry", payload);
+        this.enquireForm.fullname = '';
+        this.enquireForm.email = '';
+        this.enquireForm.phone = '';
+        this.enquireForm.message = '';
+      }
+    },
+    isValidForm(field) {
+      switch (field) {
+        case "fullname":
+          //validate name
+          if (!isNotEmpty(this.enquireForm.fullname)) {
+            this.errors.fullname = "Please enter name";
+          } else if (!validateName(this.enquireForm.fullname)) {
+            this.errors.fullname = "Name should contain alphabets only";
+          } else {
+            this.errors.fullname = null;
+          }
+          break;
+        case "email":
+          if (!isNotEmpty(this.enquireForm.email)) {
+            this.errors.email = "Please enter your email";
+          } else if (!validateEmail(this.enquireForm.email)) {
+            this.errors.email = "Please enter a valid email ";
+          } else {
+            this.errors.email = null;
+          }
+          break;
+        case "message":
+          if (!isNotEmpty(this.enquireForm.message)) {
+            this.errors.message = "Please enter message";
+          } else if (this.enquireForm.message.length > 150) {
+            this.errors.message = "Message Limit in 150 characters";
+          } else {
+            this.errors.message = null;
+          }
+          break;
+        case "phone":
+          if (!isNotEmpty(this.enquireForm.phone)) {
+            this.errors.phone = "Please enter your phone number";
+          } else if (!validateNumber(this.enquireForm.phone)) {
+            this.errors.phone = "Please enter a valid phone number";
+          } else {
+            this.errors.phone = null;
+          }
+          break;
+      }
+      if (
+        this.errors.fullname === null &&
+        this.errors.email === null &&
+        this.errors.phone === null &&
+        this.errors.message == null
+      ) {
+        this.isValid = true;
+      } else {
+        this.isValid = false;
+      }
+    },
+    setCountryLabel(arg) {
+      this.countryLabel = arg.label;
+      this.enquireForm.country = arg.label;
+    },
+    setCityLabel(arg) {
+      this.cityLabel = arg.label;
+      switch (arg.value) {
+        case "chennai":
+          this.enquireForm.city = arg.val;
+          this.projects = [{ label: "Park", value: "park" }];
+          this.projectLabel = "Park";
+          this.enquireForm.project = "park";
+          break;
+        case "mumbai":
+          this.enquireForm.city = arg.val;
+          this.projects = [{ label: "Square", value: "square" }];
+          this.projectLabel = "Square";
+          this.enquireForm.project = "square";
+          break;
+        case "gurugram":
+          this.enquireForm.city = arg.val;
+          this.projects = [
+            { label: "Edge", value: "edge" },
+            { label: "Park", value: "park" },
+          ];
+          this.projectLabel = "Edge";
+          this.enquireForm.project = "edge";
+          break;
+        case "navi-mumbai":
+          this.enquireForm.city = arg.val;
+          this.projects = [{ label: "Park", value: "park" }];
+          this.projectLabel = "Park";
+          this.enquireForm.project = "park";
+          break;
+        default:
+          break;
+      }
+      this.enquireForm.city = arg.value;
+    },
+    setProjectLabel(arg) {
+      this.projectLabel = arg.label;
+      this.enquireForm.project = arg.value;
+    },
+  },
+};
+</script>

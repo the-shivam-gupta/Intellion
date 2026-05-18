@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
+    <defs>
+        <linearGradient id="prefix__a" x1="50%" x2="50%" y1="0%" y2="100%">
+            <stop offset=".09%" stop-color="#606F83"/>
+            <stop offset="100%" stop-color="#CBBBA0"/>
+        </linearGradient>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <path stroke="url(#prefix__a)" d="M0.5 0.5H39.5V39.5H0.5z"/>
+        <path fill="#CBBBA0" d="M20 16L26 25 14 25z" transform="rotate(90 20 20.5)"/>
+    </g>
+</svg>

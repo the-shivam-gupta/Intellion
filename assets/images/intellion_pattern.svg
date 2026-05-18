@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="667px" height="870px" viewBox="0 0 667 870" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>pattern copy</title>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="pattern-copy" transform="translate(1.000000, 2.000000)" stroke="#252D36">
+            <polygon points="371.199871 88.2139432 315.199871 134 315.199871 45.7860568 371.199871 0"></polygon>
+            <polygon points="533.199871 501.213943 477.199871 547 477.199871 458.786057 533.199871 413"></polygon>
+            <polygon points="371.199871 246.213943 315.199871 292 315.199871 203.786057 371.199871 158"></polygon>
+            <polygon points="180.199871 514.563629 136.199871 559 136.199871 469.436371 180.199871 425"></polygon>
+            <rect id="Rectangle" x="225.199871" y="292" width="88" height="88"></rect>
+            <rect id="Rectangle" x="92.1998713" y="337" width="88" height="88"></rect>
+            <rect id="Rectangle" x="533.199871" y="184" width="88" height="88"></rect>
+            <rect id="Rectangle" x="135.199871" y="557" width="90" height="88"></rect>
+            <rect id="Rectangle" x="531.199871" y="497" width="90" height="88"></rect>
+            <polygon points="488.532667 314 399.199871 314 443.867076 270 533.199871 270"></polygon>
+            <polygon points="356.199871 690.333871 312.199871 735 312.199871 645.666129 356.199871 601"></polygon>
+            <polygon points="270.199871 602.333871 226.199871 647 226.199871 557.666129 270.199871 513"></polygon>
+            <polygon points="665.199871 542.333871 621.199871 587 621.199871 497.666129 665.199871 453"></polygon>
+            <polygon points="269.533743 425 180.199871 425 224.866 381 314.199871 381"></polygon>
+            <rect id="Rectangle" x="313.199871" y="381" width="88" height="88"></rect>
+            <rect id="Rectangle" x="180.199871" y="426" width="88" height="88"></rect>
+            <rect id="Rectangle" x="47.1998713" y="469" width="88" height="88"></rect>
+            <rect id="Rectangle" x="47.1998713" y="557" width="88" height="88"></rect>
+            <rect id="Rectangle" x="223.199871" y="645" width="88" height="88"></rect>
+            <rect id="Rectangle" x="356.199871" y="602" width="88" height="88"></rect>
+            <polygon points="135.199871 735.562558 91.1998713 780 91.1998713 690.435839 135.199871 646"></polygon>
+            <rect id="Rectangle" x="88.1998713" y="778" width="90" height="88"></rect>
+            <rect id="Rectangle" x="221.199871" y="733" width="90" height="88"></rect>
+            <polygon points="223.199871 821.332795 179.199871 866 179.199871 776.667205 223.199871 732"></polygon>
+            <polygon points="89.2100501 690 1.19987135 690 47.1896926 646 135.199871 646"></polygon>
+            <polygon points="398.209006 733 310.199871 733 356.190737 689 444.199871 689"></polygon>
+            <polygon points="179.533743 777 90.1998713 777 134.866 733 224.199871 733"></polygon>
+            <polygon points="312.532667 646 223.199871 646 267.867076 602 357.199871 602"></polygon>
+            <rect id="Rectangle" x="135.199871" y="645" width="88" height="88"></rect>
+            <rect id="Rectangle" x="0.199871347" y="690" width="88" height="88"></rect>
+            <rect id="Rectangle" x="0.199871347" y="778" width="88" height="88"></rect>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,27 @@
+// partials
+@import "./partials/all";
+
+//components
+@import "./components/all";
+
+//modules
+@import "./modules/all";
+
+@import "../icomoon/style.css";
+
+
+.ta__submenu--wrapper .ta__submenu--options:last-child() .submenu__details a {
+    pointer-events: none;
+}
+
+.twitter {
+    background: url('../images/x.png') no-repeat !important;
+    background-size: 100%;
+    width: 14px;
+    height: 14px;
+    padding-left: 16px;
+}
+
+.primary .ta__card--body .ta__btn--primary {
+    opacity: 1 !important;
+}

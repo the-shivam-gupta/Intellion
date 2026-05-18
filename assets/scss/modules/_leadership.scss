@@ -1,0 +1,88 @@
+#leadership-page {
+  #team {
+    padding-bottom: 100px;
+
+    @media(max-width:576px) {
+      padding-bottom: 60px;
+    }
+
+    .section__heading {
+      @media(min-width:768px) {
+        text-align: center;
+      }
+    }
+
+    .section__content {
+      width: 75%;
+      margin: 0 auto;
+
+      .ta__para {
+        color: $charcoal-grey;
+
+        @media(max-width:576px) {
+          font-size: $small;
+        }
+
+      }
+
+      @media(max-width:768px) {
+        width: 100%;
+      }
+    }
+
+    .ta__flex {
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: start;
+      flex-flow: row wrap;
+
+      @media(max-width:1024px) {
+        justify-content: space-around;
+      }
+
+      .ta__card {
+        width: 100%;
+        max-width: 337px;
+        margin-top: 40px;
+        margin-right: 33px;
+
+        .ta__card--text {
+          color: $grey-brown;
+        }
+      }
+    }
+  }
+
+  #mission {
+    &.section-padding {
+      @media(max-width:768px) {
+        padding-top: 240px;
+      }
+
+      @media(max-width:576px) {
+        padding-top: 150px;
+      }
+    }
+
+    .ta__list {
+      @media(max-width:768px) {
+        margin-top: $spacing-xl;
+      }
+
+      &--item {
+
+        &:first-child {
+          margin: 0;
+        }
+
+        .ta__para {
+          color: $charcoal-grey;
+        }
+
+        &:before {
+          top: 15px;
+        }
+      }
+    }
+  }
+}

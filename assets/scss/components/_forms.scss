@@ -1,0 +1,181 @@
+.form-group {
+  margin-bottom: $spacing-xxl-4;
+  position: relative;
+
+  &.isIos {
+    label {
+      font-size: $small !important;
+
+      &.active {
+        top: 50%;
+        transform: translateY(-50%);
+        opacity: 0;
+      }
+    }
+
+    .form-control {
+      font-size: $small !important;
+      // width: 133.333333333%;
+      // transform: scale(0.75);
+      // transform-origin: left;
+    }
+
+    ::placeholder {
+      font-size: $small !important;
+      // width: 133.333333333%;
+      // transform: scale(0.75) !important;
+      // transform-origin: left !important;
+    }
+
+    .ta__dropdown {
+      .btn {
+        font-size: $small !important;
+      }
+    }
+
+    .error {
+      font-size: 16px !important;
+      transform: scale(0.75) !important;
+      transform-origin: left !important;
+      bottom: -30px;
+    }
+  }
+
+  label {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    margin: 0;
+    transform-origin: top left;
+    transition: all .1s ease-in-out;
+    font-family: $SegoeUI;
+    font-size: $xxs;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 2.5;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: $pinkish-grey !important;
+
+    &.active {
+      transform: unset;
+      top: -20px;
+      // font-size: 11px;
+      // line-height: 2;
+    }
+  }
+}
+
+.form-control {
+  border: none;
+  border-bottom: solid 1px $pinkish-grey;
+  background-color: transparent;
+  font-family: $SegoeUI;
+  font-size: $xxs;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 2.5;
+  letter-spacing: 1px;
+  color: $grey-brown !important;
+  padding: 0;
+  border-radius: 0;
+  text-transform: uppercase;
+
+  &:focus {
+    outline: none !important;
+    box-shadow: none;
+    border: none;
+    border-bottom: solid 1px $pinkish-grey;
+    background-color: transparent;
+  }
+}
+
+.error {
+  font-family: $SegoeUI;
+  font-size: $xxs;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 2.5;
+  letter-spacing: normal;
+  color: #930000;
+  position: absolute;
+  bottom: -25px;
+  left: 0;
+}
+
+::placeholder {
+  font-family: $SegoeUI;
+  font-size: $xxs;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 2.5;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: $pinkish-grey !important;
+}
+
+::-moz-placeholder {
+  font-family: $SegoeUI;
+  font-size: $xxs;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 2.5;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: $pinkish-grey !important;
+}
+
+::-webkit-input-placeholder {
+  font-family: $SegoeUI;
+  font-size: $xxs;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 2.5;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: $pinkish-grey !important;
+}
+
+input:-internal-autofill-selected {
+  background-color: transparent !important;
+}
+
+input:-webkit-autofill {
+  background-color: transparent !important;
+}
+
+//input type number
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+input[type=tel]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+input[type=number]::-ms-clear {
+  display: none;
+}
+
+input[type=tel]::-ms-clear {
+  display: none;
+}
+
+input[type=text]::-ms-clear {
+  display: none;
+}
+
+input[type=email]::-ms-clear {
+  display: none;
+}
+
+input[type=text] {
+  background-image: none !important;
+}

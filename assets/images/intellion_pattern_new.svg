@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="448px" height="584px" viewBox="0 0 448 584" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>intellion_pattern</title>
+    <g id="Projects" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Tata-Intellion_Project-Page_Desktop_o1" transform="translate(-666.000000, -118.000000)" stroke="#252D36">
+            <g id="intellion_pattern" transform="translate(668.000000, 120.000000)">
+                <polygon points="247 59.2481708 210 90 210 30.7518292 247 0"></polygon>
+                <polygon points="357 335.248171 320 366 320 306.751829 357 276"></polygon>
+                <polygon points="247 165.248171 210 196 210 136.751829 247 106"></polygon>
+                <polygon points="120 344.154676 91 374 91 313.845324 120 284"></polygon>
+                <rect id="Rectangle" x="150" y="195" width="59" height="59"></rect>
+                <rect id="Rectangle" x="62" y="225" width="59" height="59"></rect>
+                <rect id="Rectangle" x="356" y="124" width="59" height="59"></rect>
+                <rect id="Rectangle" x="90" y="372" width="60" height="59"></rect>
+                <rect id="Rectangle" x="355" y="333" width="60" height="59"></rect>
+                <polygon points="326.999639 210 267 210 297.000362 181 357 181"></polygon>
+                <polygon points="238 462.000361 209 492 209 431.999639 238 402"></polygon>
+                <polygon points="182 403.000361 153 433 153 372.999639 182 343"></polygon>
+                <polygon points="445 363.000361 416 393 416 332.999639 445 303"></polygon>
+                <polygon points="181.000362 284 121 284 150.999639 255 211 255"></polygon>
+                <rect id="Rectangle" x="209" y="254" width="59" height="59"></rect>
+                <rect id="Rectangle" x="121" y="285" width="59" height="59"></rect>
+                <rect id="Rectangle" x="31" y="313" width="59" height="59"></rect>
+                <rect id="Rectangle" x="31" y="372" width="59" height="59"></rect>
+                <rect id="Rectangle" x="149" y="431" width="59" height="59"></rect>
+                <rect id="Rectangle" x="239" y="403" width="59" height="59"></rect>
+                <polygon points="90 492.153957 61 522 61 461.844966 90 432"></polygon>
+                <rect id="Rectangle" x="59" y="521" width="60" height="59"></rect>
+                <rect id="Rectangle" x="148" y="492" width="60" height="59"></rect>
+                <polygon points="149 549.999638 120 580 120 520.000362 149 490"></polygon>
+                <polygon points="59.1113142 462 0 462 30.888686 433 90 433"></polygon>
+                <polygon points="267.110613 490 208 490 238.889388 461 298 461"></polygon>
+                <polygon points="120.000362 520 60 520 89.9996387 491 150 491"></polygon>
+                <polygon points="208.999639 432 149 432 179.000362 403 239 403"></polygon>
+                <rect id="Rectangle" x="90" y="431" width="59" height="59"></rect>
+                <rect id="Rectangle" x="0" y="462" width="59" height="59"></rect>
+                <rect id="Rectangle" x="0" y="521" width="59" height="59"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

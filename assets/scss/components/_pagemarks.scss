@@ -1,0 +1,138 @@
+.pagemarks {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  border: solid 1px $very-light-pink;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+
+  @media(max-width:768px) {
+    display: block;
+    align-items: unset;
+    justify-content: unset;
+    text-align: center;
+    border: none;
+  }
+
+  &.fixed {
+    position: fixed;
+    top: 74px;
+    z-index: 8;
+    background-color: $heal-white;
+
+    @media(max-width:1024px) {
+      top: 64px;
+    }
+  }
+
+  &__logo {
+    height: calc(100% - 30px);
+    margin-right: 45px;
+
+    @media(max-width:768px) {
+      padding: $spacing-l 0;
+      margin: 0 auto;
+      display: none;
+    }
+
+    img {
+      width: 120px;
+      object-fit: contain;
+
+      &.chennai {
+        width: 80px;
+      }
+
+      @media(max-width:768px) {
+        height: 35px;
+
+      }
+
+    }
+  }
+
+  &__list {
+    // margin: 0 auto;
+    width: auto;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    overflow-x: auto;
+    overflow-y: hidden;
+    justify-content: center;
+    margin-bottom: 0;
+
+    @media(max-width:768px) {
+      border-top: solid 1px $very-light-pink;
+      border-bottom: solid 1px $very-light-pink;
+    }
+
+    @media(max-width:576px) {
+      justify-content: flex-start;
+    }
+  }
+
+  &__item {
+    list-style-type: none;
+    cursor: pointer;
+    @include prefixed(transition, color .3s ease 0s);
+
+    a {
+      padding: $spacing-xs 35px;
+      display: block;
+      cursor: pointer;
+
+      @media(max-width: 768px) {
+        padding: 0px;
+      }
+    }
+
+    &:hover {
+      a {
+        color: $grey-brown;
+      }
+    }
+
+    @media(max-width:768px) {
+      padding: $spacing-xs $spacing-s;
+    }
+
+    @media(max-width:576px) {
+      padding: $spacing-xs;
+    }
+
+    a {
+      @extend .ta__small2;
+      color: $charcoal-grey;
+      width: auto;
+      text-decoration: none;
+      white-space: nowrap;
+      text-transform: uppercase;
+
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+
+  #indicator {
+    position: absolute;
+    height: 1px;
+    background-color: $grey-brown;
+    z-index: 1;
+    bottom: 0;
+    left: 0;
+    width: auto;
+    opacity: 1;
+    @include prefixed(transition, all .3s ease-in-out 0s);
+
+    @media(max-width:768px) {
+      display: none;
+    }
+  }
+}

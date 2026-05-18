@@ -1,0 +1,152 @@
+input:focus {
+  outline: none;
+}
+
+.custom-control-input:focus:not(:checked)~.custom-control-label::before {
+  border-color: $grey-brown;
+}
+
+.custom-control-input:focus~.custom-control-label::before {
+  box-shadow: none;
+}
+
+.custom-radio .custom-control-input:checked~.custom-control-label::before {
+  border-color: $grey-brown;
+}
+
+.custom-radio .custom-control-input:checked~.custom-control-label::after {
+  background-color: $grey-brown;
+}
+
+.custom-checkbox .custom-control-input:checked~.custom-control-label::before {
+  border-color: $grey-brown;
+}
+
+.custom-checkbox .custom-control-input:checked~.custom-control-label::after {
+  background-color: $grey-brown;
+}
+
+/*Radio*/
+.custom-control-input {
+  width: 20px;
+  height: 20px;
+  opacity: 0;
+  left: -6px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.custom-control-input:checked~.custom-control-label::before {
+  background-color: transparent;
+}
+
+.custom-radio .custom-control-label::before {
+  border-radius: 0 !important;
+}
+
+.custom-checkbox .custom-control-input:checked~.custom-control-label::before {
+  background-color: transparent;
+}
+
+.custom-radio .custom-control-input:checked~.custom-control-label::after {
+  background-image: none !important;
+}
+
+.custom-radio .custom-control-label::after {
+  width: 12px;
+  height: 12px;
+  left: -26px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.custom-radio .custom-control-label::before {
+  background-color: transparent;
+  border-radius: 0;
+  border: solid 1px $grey-brown;
+  width: 20px;
+  height: 20px;
+  left: -30px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.custom-radio .custom-control-label {
+  text-transform: uppercase;
+}
+
+.custom-radio .custom-control-label,
+.custom-checkbox .custom-control-label {
+  font-family: $Bitter;
+  font-size: $xxs;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 2;
+  letter-spacing: 1px;
+  text-align: center;
+  color: $charcoal-grey;
+  cursor: pointer;
+
+  @media (max-width: 576px) {
+    font-size: $xxs + 2px;
+  }
+}
+
+/*radio ends here*/
+
+.custom-checkbox .custom-control-input:checked~.custom-control-label::after {
+  background-image: none !important;
+}
+
+.bv-no-focus-ring {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex: 1;
+
+  @media (max-width: 576px) {
+    text-align: left;
+    display: block;
+  }
+}
+
+.custom-checkbox .custom-control-label {
+  font-family: $Bitter;
+  font-size: $xxs;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 2;
+  letter-spacing: 1px;
+  text-align: center;
+  color: $charcoal-grey;
+}
+
+.custom-control-input:not(:disabled):active~.custom-control-label::before {
+  background-color: transparent;
+  border-color: $grey-brown;
+}
+
+.custom-checkbox .custom-control-label::after {
+  width: 12px;
+  height: 12px;
+  left: -26px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.custom-checkbox .custom-control-label::before {
+  background-color: transparent;
+  border-radius: 0;
+  border: solid 1px $grey-brown;
+  width: 20px;
+  height: 20px;
+  left: -30px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  @media (max-width: 576px) {
+    left: -30px;
+  }
+}
