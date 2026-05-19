@@ -109,7 +109,13 @@
     top: -20px;"
             :style="{ display:$device.isIos?'none':'inline-block' }"
           >Project Interested*</label>
-          <b-dropdown split id="dropdown-project" :text="projectLabel" class="ta__dropdown">
+          <b-dropdown
+            split
+            id="dropdown-project"
+            class="ta__dropdown"
+            :key="'project-' + enquireForm.city"
+          >
+            <template #button-content>{{ projectLabel }}</template>
             <b-dropdown-item
               v-for="(project,index) in projects"
               :key="'project-'+index"
@@ -327,50 +333,50 @@ export default {
     },
     setCityLabel(arg) {
       this.cityLabel = arg.label;
-      switch (arg.value) {
-        case "pune":
-          this.enquireForm.city = arg.val;
-          this.projects = [{ label: "Edge", value: "edge" }];
-          this.projectLabel = "Edge";
-          this.enquireForm.project = "edge";
-          break;
-        case "bengaluru":
-          this.enquireForm.city = arg.val;
-          this.projects = [{ label: "Park", value: "park" }];
-          this.projectLabel = "Park";
-          this.enquireForm.project = "park";
-          break;
-        case "chennai":
-          this.enquireForm.city = arg.val;
-          this.projects = [{ label: "Park", value: "park" }];
-          this.projectLabel = "Park";
-          this.enquireForm.project = "park";
-          break;
-        case "mumbai":
-          this.enquireForm.city = arg.val;
-          this.projects = [{ label: "Square", value: "square" }];
-          this.projectLabel = "Square";
-          this.enquireForm.project = "square";
-          break;
-        case "gurugram":
-          this.enquireForm.city = arg.val;
-          this.projects = [
+      this.enquireForm.city = arg.value;
+
+      const cityProjects = {
+        pune: {
+          projects: [{ label: "Edge", value: "edge" }],
+          projectLabel: "Edge",
+          project: "edge",
+        },
+        bengaluru: {
+          projects: [{ label: "Park", value: "park" }],
+          projectLabel: "Park",
+          project: "park",
+        },
+        chennai: {
+          projects: [{ label: "Park", value: "park" }],
+          projectLabel: "Park",
+          project: "park",
+        },
+        mumbai: {
+          projects: [{ label: "Square", value: "square" }],
+          projectLabel: "Square",
+          project: "square",
+        },
+        gurugram: {
+          projects: [
             { label: "Edge", value: "edge" },
             { label: "Park", value: "park" },
-          ];
-          this.projectLabel = "Edge";
-          this.enquireForm.project = "edge";
-          break;
-        case "navi-mumbai":
-          this.enquireForm.city = arg.val;
-          this.projects = [{ label: "Park", value: "park" }];
-          this.projectLabel = "Park";
-          this.enquireForm.project = "park";
-          break;
-        default:
-          break;
+          ],
+          projectLabel: "Edge",
+          project: "edge",
+        },
+        "navi-mumbai": {
+          projects: [{ label: "Park", value: "park" }],
+          projectLabel: "Park",
+          project: "park",
+        },
+      };
+
+      const config = cityProjects[arg.value];
+      if (config) {
+        this.projects = config.projects;
+        this.projectLabel = config.projectLabel;
+        this.enquireForm.project = config.project;
       }
-      this.enquireForm.city = arg.value;
     },
     setProjectLabel(arg) {
       this.projectLabel = arg.label;
