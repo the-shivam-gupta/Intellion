@@ -5,9 +5,13 @@
     id="project__tabs"
     :align="alignLeft ? 'left' : 'right'"
   >
-    <b-tab v-for="(tag, index) in filters.project_tag" :title="tag.slug" :key="'tag' + index">
-      <slick :options="slickOptions" v-if="isNuxtReady">
-        <template v-for="(project, index) in projects.projects_list">
+    <b-tab v-for="(tag, index) in filters.project_tag" :title="tag.name" :key="'tag' + index">
+      <slick
+        :options="slickOptions"
+        v-if="isNuxtReady"
+        :key="`${tag.slug}-${projectsList.length}`"
+      >
+        <template v-for="(project, index) in projectsList">
           <ta-primary-card
             :content="project"
             :key="'projects' + index"
@@ -22,8 +26,16 @@
 <script>
 const slick = () =>
   window && window !== undefined ? import("vue-slick") : null;
-import { uniqueByKeepLast } from "~/middleware/utils";
 export default {
+  async fetch() {
+    if (!this.$store.state.projects.projects.length) {
+      await this.$store.dispatch("projects/getProjects", {
+        page_no: 1,
+        per_page: 100,
+        filter: 1,
+      });
+    }
+  },
   data() {
     return {
       isNuxtReady: false,
@@ -82,9 +94,14 @@ export default {
     filters: function () {
       return this.$store.getters.homePageDetails.filters;
     },
-    projects: function () {
-      //console.log(this.$store.getters.homePageDetails.projects);
-      return this.$store.getters.homePageDetails.projects;
+    projectsList: function () {
+      const fromStore = this.$store.state.projects.projects;
+      if (Array.isArray(fromStore) && fromStore.length > 0) {
+        return fromStore;
+      }
+      const homeProjects =
+        this.$store.getters.homePageDetails.projects.projects_list || [];
+      return homeProjects;
     },
   },
   mounted() {
