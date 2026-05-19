@@ -38,6 +38,18 @@ export const state = () => ({
 
 export const getters = {
   homePageDetails: state => {
+    if (!state.pageLoadData) {
+      return {
+        banner: { slider: [] },
+        facts: { facts_list: [] },
+        projects: { projects_list: [], title: "", description: "" },
+        testimonials: { title: "", testimonies: [] },
+        features: {},
+        filters: { project_tag: [] },
+        news: [],
+        note: null
+      };
+    }
     return {
       banner: state.pageLoadData.hero_section,
       facts: state.pageLoadData.facts_section,
@@ -50,28 +62,35 @@ export const getters = {
     };
   },
   meta: state => {
-    return state.pageLoadData.meta_data;
+    return state.pageLoadData ? state.pageLoadData.meta_data : [];
   },
   thankPage: state => {
-    return state.pageLoadData.other_pages.thank_you_page;
+    return state.pageLoadData ? state.pageLoadData.other_pages.thank_you_page : null;
   },
   policy: state => {
-    return state.pageLoadData.other_pages.privacy_page;
+    return state.pageLoadData ? state.pageLoadData.other_pages.privacy_page : null;
   },
   terms: state => {
-    return state.pageLoadData.other_pages.terms_and_conditions_page;
+    return state.pageLoadData ? state.pageLoadData.other_pages.terms_and_conditions_page : null;
   },
   latest_news: state => {
-    return state.pageLoadData.latest_news_section.news;
+    return state.pageLoadData ? state.pageLoadData.latest_news_section.news : [];
   },
   menus: state => {
+    const emptyMenu = { title: "", children: [] };
+    if (!state.pageLoadData) {
+      return {
+        header: [],
+        footer: [emptyMenu, emptyMenu, emptyMenu, emptyMenu]
+      };
+    }
     return {
       header: state.pageLoadData.header_section.menus,
       footer: state.pageLoadData.footer_section.menus
     };
   },
   link: state => {
-    return state.pageLoadData.meta_data;
+    return state.pageLoadData ? state.pageLoadData.meta_data : [];
   }
 };
 
@@ -108,7 +127,9 @@ export const mutations = {
 export const actions = {
   async nuxtServerInit({ commit }) {
     try {
-      const res = await this.$axios.$get("/home_page");
+      const res = await this.$axios.$get("/home_page", {
+        skipErrorRedirect: true
+      });
       if (res) {
         commit("updatePageLoadData", res);
         // commit("updateMeta", commitData.meta_data);
@@ -131,7 +152,10 @@ export const actions = {
     }
   },
   async updateMeta({ commit }, metaData) {
-    
+    if (!metaData) {
+      return;
+    }
+
     let seo_meta_canonical_url = null;
     if(metaData && metaData.seo_meta_canonical_url!=''){
       seo_meta_canonical_url = metaData.seo_meta_canonical_url;

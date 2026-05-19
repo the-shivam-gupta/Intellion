@@ -1,0 +1,25 @@
+.primary .ta__card--body .ta__card--text{
+    min-height: 120px;
+}
+
+.primary .ta__card--body .ta__card--title{
+    min-height: 115px;
+}
+
+.ta__footer--links.social .quicklinks__item{
+    margin-bottom: 16px !important;
+}
+
+.ta__footer--links .quicklinks{
+    margin: 10px 0 0 0 !important;
+}
+
+#sustainability #project-features .ta__card--text{
+    min-height: 231px;
+}
+
+@media (min-width: 1400px) {
+    .container-xxl, .container-xl, .container-lg, .container-md, .container-sm, .container {
+        max-width: 1140px !important;
+    }
+}

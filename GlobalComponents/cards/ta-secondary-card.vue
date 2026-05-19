@@ -17,7 +17,7 @@
     >
       <img
         :data-src="
-          content.background_image.src !== ''
+          content.background_image && content.background_image.src
             ? content.background_image.src
             : '~/assets/images/banner_01.jpg'
         "

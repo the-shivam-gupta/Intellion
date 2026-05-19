@@ -177,6 +177,8 @@ export default {
         { label: "Gurugram", value: "gurugram" },
         { label: "Chennai", value: "chennai" },
         { label: "Navi Mumbai", value: "navi-mumbai" },
+        { label: "Pune", value: "pune" },
+        { label: "Bengaluru", value: "bengaluru" },
       ],
       projects: [{ label: "Square", value: "square" }],
       errors: {

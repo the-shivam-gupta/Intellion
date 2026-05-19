@@ -70,6 +70,7 @@ export default {
   // ------------------ PLUGINS ------------------
   plugins: [
     "~/plugins/axios.js",
+    "~/plugins/imageSrcset.js",
     "~/plugins/onload.component.js",
     "~/plugins/onload.client.js",
     { src: "@/plugins/aos", ssr: false }

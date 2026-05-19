@@ -20,11 +20,7 @@
           ></video>
           <img
             :src="slide.image.src"
-            :srcset="
-              (slide.image.src + ' 1x',
-              slide.sizes.medium + ' 2x',
-              slide.sizes.large + ' 3x')
-            "
+            :srcset="$buildImageSrcset(slide.image, slide.sizes)"
             alt="Tata Intellion"
             class="image"
             v-else
@@ -143,7 +139,8 @@ export default {
   },
   computed: {
     slides: function() {
-      return this.$store.getters.homePageDetails.banner.slider;
+      const banner = this.$store.getters.homePageDetails.banner;
+      return (banner && banner.slider) ? banner.slider : [];
     }
   },
   methods: {

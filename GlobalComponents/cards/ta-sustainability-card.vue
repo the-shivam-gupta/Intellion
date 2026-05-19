@@ -10,11 +10,7 @@
           <img
             v-if="content.feature_image && content.feature_image.src"
             :src="content.feature_image.src"
-            :srcset="
-              (content.feature_image.src + ' 1x',
-              content.feature_image.sizes.medium + ' 2x',
-              content.feature_image.sizes.large + ' 3x')
-            "
+            :srcset="$buildImageSrcset(content.feature_image)"
             :alt="(content.feature_image.alt!='')?content.feature_image.alt:'Tata Intellion'"
             data-aos="fade-in"
           />

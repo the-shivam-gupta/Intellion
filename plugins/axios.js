@@ -1,18 +1,24 @@
+import https from "https";
+
 export default function({ $axios, app, redirect, store }) {
+  if (process.env.NODE_ENV === "development") {
+    $axios.defaults.httpsAgent = new https.Agent({
+      rejectUnauthorized: false
+    });
+  }
   $axios.onError(async error => {
-    error = {
-      ...error
-    };
-    let returnVal = false;
-    let redir = true;
     store.commit("updateGlobalLoader", false);
 
+    if (error.config && error.config.skipErrorRedirect) {
+      return Promise.reject(error);
+    }
+
     const res = error.response;
-    if (redir && res) {
+    if (res) {
       redirect(`/error?status=${res.status}`);
     }
 
-    return Promise.resolve(returnVal);
+    return Promise.resolve(false);
   });
   $axios.onRequest(req => {
     store.commit("updateGlobalLoader", true);

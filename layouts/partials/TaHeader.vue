@@ -592,6 +592,12 @@ export default {
     },
     getHeaderMenus() {
       this.isActive = false;
+      if (!this.menus || !this.menus.length) {
+        this.items = [];
+        this.items2 = [];
+        this.isLoaded = true;
+        return;
+      }
       let middle = Math.ceil(this.menus.length / 2);
       this.items = this.menus.slice(0, middle);
       this.items2 = this.menus.slice(middle, this.menus.length);

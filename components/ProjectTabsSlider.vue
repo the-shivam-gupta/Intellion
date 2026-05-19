@@ -1,5 +1,10 @@
 <template>
-  <b-tabs class="project__tabs" id="project__tabs" :align="alignLeft ? 'left' : 'right'">
+  <b-tabs
+    v-if="filters && filters.project_tag && filters.project_tag.length"
+    class="project__tabs"
+    id="project__tabs"
+    :align="alignLeft ? 'left' : 'right'"
+  >
     <b-tab v-for="(tag, index) in filters.project_tag" :title="tag.slug" :key="'tag' + index">
       <slick :options="slickOptions" v-if="isNuxtReady">
         <template v-for="(project, index) in projects.projects_list">

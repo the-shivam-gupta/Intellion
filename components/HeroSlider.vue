@@ -244,6 +244,10 @@ export default {
     popup: function () {
         const sliders = {};
 
+        if (!this.slideImages || !this.slideImages.length) {
+          return sliders;
+        }
+
         this.slideImages.forEach((slide, index) => {
           if (slide.popup_image.src || slide.popup_image_mobile.src) {
             sliders[index] = slide;

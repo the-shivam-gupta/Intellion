@@ -4,7 +4,10 @@
       <!-- <HomeBanner /> -->
       <!-- :slideImages="homepage.banner.slider" -->
       <section class="section hero" id="hero">
-        <HeroSlider v-if="isNuxtReady" :slideImages="homepage.banner.slider" />
+        <HeroSlider
+          v-if="isNuxtReady && homepage.banner.slider && homepage.banner.slider.length"
+          :slideImages="homepage.banner.slider"
+        />
         <div class="scroll-down">
           <a @click.prevent="scrollToTargetAdjusted('#projects')" class="icon">
             <img src="~/assets/images/scroll.svg" alt="Tata Intellion" />

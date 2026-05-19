@@ -28,3 +28,19 @@ export const validateNumber = number => {
 export const autoFocusInput = fieldId => {
   document.getElementById(fieldId).focus();
 };
+
+/** Build srcset from WordPress-style image; sizes may live on image or a sibling object. */
+export const buildImageSrcset = (image, sizesOverride) => {
+  if (!image || !image.src) {
+    return undefined;
+  }
+  const sizes = sizesOverride || image.sizes || {};
+  const parts = [`${image.src} 1x`];
+  if (sizes.medium) {
+    parts.push(`${sizes.medium} 2x`);
+  }
+  if (sizes.large) {
+    parts.push(`${sizes.large} 3x`);
+  }
+  return parts.join(", ");
+};

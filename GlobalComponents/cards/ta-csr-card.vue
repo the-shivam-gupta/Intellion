@@ -26,7 +26,7 @@
             </div>
           </div>
           <div class="col-lg-3 col-md-3 col-sm-4">
-            <div class="nt_image_wrapper" v-if="content.listing_page_content.feature_image.src">
+            <div class="nt_image_wrapper" v-if="content.listing_page_content && content.listing_page_content.feature_image && content.listing_page_content.feature_image.src">
               <img :src="content.listing_page_content.feature_image.src" alt />
             </div>
           </div>

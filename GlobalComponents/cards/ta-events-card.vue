@@ -26,7 +26,7 @@
           </div>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-4">
-          <div class="nt_image_wrapper" v-if="content.background_image.src">
+          <div class="nt_image_wrapper" v-if="content.background_image && content.background_image.src">
             <img :src="content.background_image.src" alt />
           </div>
         </div>
@@ -56,7 +56,7 @@
           </div>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-4">
-          <div class="nt_image_wrapper" v-if="content.background_image.src">
+          <div class="nt_image_wrapper" v-if="content.background_image && content.background_image.src">
             <img :src="content.background_image.src" alt />
           </div>
         </div>

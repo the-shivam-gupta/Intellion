@@ -3,12 +3,8 @@
     <div class="ta__card--image" v-if="from !== 'sustainability'">
       <img
         :src="image && image.src ? image.src : '~/assets/images/banner_01.jpg'"
-        :alt="(image.alt!='') ? image.alt : 'Tata Intellion'"
-        :srcset="
-          (image.src + ' 1x',
-          image.sizes.medium + ' 2x',
-          image.sizes.large + ' 3x')
-        "
+        :alt="image && image.alt ? image.alt : 'Tata Intellion'"
+        :srcset="$buildImageSrcset(image)"
         data-aos="fade-in"
       />
     </div>
@@ -19,12 +15,8 @@
             ? image.image.src
             : '~/assets/images/banner_01.jpg'
         "
-        :alt="(image.image.alt!='') ? image.image.alt : 'Tata Intellion'"
-        :srcset="
-          (image.image.src + ' 1x',
-          image.image.sizes.medium + ' 2x',
-          image.image.sizes.large + ' 3x')
-        "
+        :alt="image.image && image.image.alt ? image.image.alt : 'Tata Intellion'"
+        :srcset="$buildImageSrcset(image.image)"
         data-aos="fade-in"
       />
     </div>

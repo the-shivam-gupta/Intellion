@@ -1,9 +1,12 @@
 <template>
   <div class="hero" :class="[type, heroStyle]">
-    <div class="hero__image" v-if="type === 'two' || type === 'four'">
+    <div
+      class="hero__image"
+      v-if="(type === 'two' || type === 'four') && content && content.background_image && content.background_image.src"
+    >
       <img
         :src="content.background_image.src"
-        :srcset="(content.background_image.src+' 1x',content.background_image.sizes.medium +' 2x', content.background_image.sizes.large+' 3x')"
+        :srcset="$buildImageSrcset(content.background_image)"
         :alt="
           content.background_image.alt !== ''
             ? content.background_image.alt

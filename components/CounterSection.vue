@@ -56,7 +56,8 @@ export default {
       return this.$store.getters.homePageDetails.facts;
     },
     achievements: function () {
-      return this.$store.getters.homePageDetails.facts.facts_list;
+      const facts = this.$store.getters.homePageDetails.facts;
+      return (facts && facts.facts_list) ? facts.facts_list : [];
     }
   },
   methods: {
@@ -68,7 +69,7 @@ export default {
       this.achievements.forEach((achievement) => {
         console.log(achievement);
         let countUp = new CountUp(
-          this.toID(achievement.item_name),
+          // this.toID(achievement.item_name),
           +achievement.quantity__value,
           this.options
         );

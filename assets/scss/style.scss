@@ -1,4 +1,5 @@
 // partials
+@import "./partials/bootstrap5-compat";
 @import "./partials/all";
 
 //components
@@ -9,17 +10,20 @@
 
 @import "../icomoon/style.css";
 
+@import "./correction.scss";  //bootstrap 5.83 fixes
+
 
 .ta__submenu--wrapper .ta__submenu--options:last-child() .submenu__details a {
     pointer-events: none;
 }
 
 .twitter {
-    background: url('../images/x.png') no-repeat !important;
-    background-size: 100%;
+    display: inline-block;
+    background: url('../images/x.png') no-repeat center !important;
+    background-size: contain;
     width: 14px;
     height: 14px;
-    padding-left: 16px;
+    padding: 0;
 }
 
 .primary .ta__card--body .ta__btn--primary {

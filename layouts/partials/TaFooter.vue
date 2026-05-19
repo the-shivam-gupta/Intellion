@@ -27,9 +27,10 @@
                         class="quicklinks__item"
                         v-for="(menu, index) in projectMenus.children"
                         :key="'footerMenuOne_' + index"
-                        @click="changeQuery(menu.url)"
                       >
-                        <nuxt-link :to="menu.url">{{ menu.title }}</nuxt-link>
+                        <nuxt-link :to="menu.url" @click.native="onProjectLinkClick(menu.url)">
+                          {{ menu.title }}
+                        </nuxt-link>
                       </li>
                     </ul>
                   </div>
@@ -70,18 +71,21 @@
                     >
                       <a
                         :href="menu.url"
-                        rel="noopener"
+                        rel="noopener noreferrer"
                         target="_blank"
-                        class="d-flex align-items-center"
                       >
-                        <span class="twitter mr-2" v-if="menu.title =='twitter'"></span>
-                        <span class="ta__icon icon-linkedin mr-2" v-if="menu.title=='linkedin'"></span>
-                        <span class="ta__icon icon-instagram mr-2" v-if="menu.title=='instagram'"></span>
-                        <span class="ta__icon icon-facebook mr-2" v-if="menu.title=='facebook'"></span>
-                        <span class="ta__icon icon-shape mr-2" v-if="menu.title=='youtube'"></span>
-                        <span
-                          class="text"
-                        >{{ menu.title =='linkedin'?'LinkedIn':menu.title=='youtube'?'YouTube':menu.title }}</span>
+                        <span class="twitter" v-if="menu.title === 'twitter'"></span>
+                        <span class="ta__icon icon-linkedin" v-else-if="menu.title === 'linkedin'"></span>
+                        <span class="ta__icon icon-instagram" v-else-if="menu.title === 'instagram'"></span>
+                        <span class="ta__icon icon-facebook" v-else-if="menu.title === 'facebook'"></span>
+                        <span class="ta__icon icon-shape" v-else-if="menu.title === 'youtube'"></span>
+                        <span class="text">{{
+                          menu.title === "linkedin"
+                            ? "LinkedIn"
+                            : menu.title === "youtube"
+                            ? "YouTube"
+                            : menu.title
+                        }}</span>
                       </a>
                     </li>
                   </ul>
@@ -109,24 +113,33 @@
 <script>
 export default {
   methods: {
-    text(arg) {},
+    onProjectLinkClick(url) {
+      if (url && url.includes("=")) {
+        this.changeQuery(url);
+      }
+    },
     changeQuery(val) {
-      let newVal = val.split("=")[1];
-      this.$nuxt.$emit("changeQuery", newVal);
+      const newVal = val.split("=")[1];
+      if (newVal) {
+        this.$nuxt.$emit("changeQuery", newVal);
+      }
     },
   },
   computed: {
-    projectMenus: function () {
-      return this.$store.getters.menus.footer[0];
+    emptyMenu() {
+      return { title: "", children: [] };
     },
-    discoverMenus: function () {
-      return this.$store.getters.menus.footer[1];
+    projectMenus() {
+      return this.$store.getters.menus.footer[0] || this.emptyMenu;
     },
-    quickLinks: function () {
-      return this.$store.getters.menus.footer[2];
+    discoverMenus() {
+      return this.$store.getters.menus.footer[1] || this.emptyMenu;
     },
-    socialMenus: function () {
-      return this.$store.getters.menus.footer[3];
+    quickLinks() {
+      return this.$store.getters.menus.footer[2] || this.emptyMenu;
+    },
+    socialMenus() {
+      return this.$store.getters.menus.footer[3] || this.emptyMenu;
     },
   },
 };
