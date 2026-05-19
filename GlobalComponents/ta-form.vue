@@ -328,6 +328,18 @@ export default {
     setCityLabel(arg) {
       this.cityLabel = arg.label;
       switch (arg.value) {
+        case "pune":
+          this.enquireForm.city = arg.val;
+          this.projects = [{ label: "Edge", value: "edge" }];
+          this.projectLabel = "Edge";
+          this.enquireForm.project = "edge";
+          break;
+        case "bengaluru":
+          this.enquireForm.city = arg.val;
+          this.projects = [{ label: "Park", value: "park" }];
+          this.projectLabel = "Park";
+          this.enquireForm.project = "park";
+          break;
         case "chennai":
           this.enquireForm.city = arg.val;
           this.projects = [{ label: "Park", value: "park" }];
