@@ -139,6 +139,11 @@ export default {
     port: 20000
   },
 
+  serverMiddleware: [
+    "~/server-middleware/security-headers.js",
+    "~/server-middleware/force-www.js"
+  ],
+
   // ------------------ SSR CACHE ------------------
   cache: {
     useHostPrefix: false,

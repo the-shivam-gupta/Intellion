@@ -58,24 +58,19 @@ export default {
     };
   },
   beforeMount() {
+    const features = this.content && this.content.features;
+    const points = this.content && this.content.points;
+
     if (this.has === "features") {
-      if (this.content.features.length > 0) {
-        let middle = Math.ceil(this.content.features.length / 2);
-        this.menusOne = this.content.features.slice(0, middle);
-        this.menusTwo = this.content.features.slice(
-          middle,
-          this.content.features.length
-        );
+      if (features && features.length > 0) {
+        const middle = Math.ceil(features.length / 2);
+        this.menusOne = features.slice(0, middle);
+        this.menusTwo = features.slice(middle, features.length);
       }
-    } else {
-      if (this.content.points.length > 0) {
-        let middle = Math.ceil(this.content.points.length / 2);
-        this.menusOne = this.content.points.slice(0, middle);
-        this.menusTwo = this.content.points.slice(
-          middle,
-          this.content.points.length
-        );
-      }
+    } else if (points && points.length > 0) {
+      const middle = Math.ceil(points.length / 2);
+      this.menusOne = points.slice(0, middle);
+      this.menusTwo = points.slice(middle, points.length);
     }
   },
 };

@@ -327,7 +327,7 @@ export default {
     },
     twitterSocialUrl: function () {
       return process.client
-        ? "http://twitter.com/share?text=" +
+        ? "https://twitter.com/intent/tweet?text=" +
             "Hi, checkout this link from TATA Intellion" +
             "&url=" +
             window.location.origin +

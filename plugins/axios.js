@@ -1,11 +1,14 @@
 import https from "https";
 
 export default function({ $axios, app, redirect, store }) {
+  // Dev only: local/corporate networks often fail Node TLS to webapi.intellion.in.
+  // Production keeps full certificate verification (VAPT requirement).
   if (process.env.NODE_ENV === "development") {
     $axios.defaults.httpsAgent = new https.Agent({
       rejectUnauthorized: false
     });
   }
+
   $axios.onError(async error => {
     store.commit("updateGlobalLoader", false);
 
