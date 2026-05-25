@@ -264,7 +264,6 @@ export default {
         : "Tata Intellion",
          meta: this.$store.state.meta,
       link: [
-        ...this.$store.state.meta,
         { hid: 'canonical', rel: 'canonical', href: `https://www.intellion.in${this.$route.fullPath}` }
       ],
     };
