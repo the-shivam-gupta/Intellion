@@ -12,10 +12,17 @@
           <picture>
           <source
             v-if="slide.image_mobile && slide.image_mobile.src"
-            :srcset="slide.image_mobile.src" media="(max-width:540px)">
-          <img :src="slide.image.src" :alt="slide.image.alt" v-if="!slide.video_file_url" />
+            :srcset="$buildImageSrcset(slide.image_mobile)"
+            :sizes="$buildImageSizes('banner')"
+            media="(max-width:768px)">
+          <img
+            :src="slide.image.src"
+            :srcset="$buildImageSrcset(slide.image, slide.sizes)"
+            :sizes="$buildImageSizes('banner')"
+            :alt="slide.image.alt"
+            v-if="!slide.video_file_url"
+          />
         </picture>
-        <!-- :srcset="(slide.sizes.large +' 3x', slide.sizes.medium+' 2x', slide.image.src+' 1x')" -->
         
         <video
           aria-label="banner video"
@@ -101,10 +108,17 @@
         <picture>
           <source
             v-if="slide.image_mobile && slide.image_mobile.src"
-            :srcset="slide.image_mobile.src" media="(max-width:540px)">
-          <img :src="slide.image.src" :alt="slide.image.alt" v-if="!slide.video_file_url" />
+            :srcset="$buildImageSrcset(slide.image_mobile)"
+            :sizes="$buildImageSizes('banner')"
+            media="(max-width:768px)">
+          <img
+            :src="slide.image.src"
+            :srcset="$buildImageSrcset(slide.image, slide.sizes)"
+            :sizes="$buildImageSizes('banner')"
+            :alt="slide.image.alt"
+            v-if="!slide.video_file_url"
+          />
         </picture>
-        <!-- :srcset="(slide.sizes.large +' 3x', slide.sizes.medium+' 2x', slide.image.src+' 1x')" -->
         <video
           aria-label="banner video"
           playsinline="playsinline"

@@ -27,7 +27,7 @@
           v-for="(item, index) in content"
           :key="id + index"
         >
-          <ta-image-card :image="item"></ta-image-card>
+          <ta-image-card :image="item" sizes-context="fitSlider"></ta-image-card>
         </div>
       </slick>
     </div>

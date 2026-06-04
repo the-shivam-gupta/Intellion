@@ -28,7 +28,11 @@ const slick = () =>
   window && window !== undefined ? import("vue-slick") : null;
 export default {
   async fetch() {
-    if (!this.$store.state.projects.projects.length) {
+    const storeProjects = this.$store.state.projects.projects;
+    const homeProjects =
+      this.$store.getters.homePageDetails.projects.projects_list || [];
+    // Project detail pages overwrite the store with a single project; refetch the full list.
+    if (!storeProjects.length || storeProjects.length < homeProjects.length) {
       await this.$store.dispatch("projects/getProjects", {
         page_no: 1,
         per_page: 100,
@@ -96,11 +100,14 @@ export default {
     },
     projectsList: function () {
       const fromStore = this.$store.state.projects.projects;
-      if (Array.isArray(fromStore) && fromStore.length > 0) {
-        return fromStore;
-      }
       const homeProjects =
         this.$store.getters.homePageDetails.projects.projects_list || [];
+      if (
+        Array.isArray(fromStore) &&
+        fromStore.length >= homeProjects.length
+      ) {
+        return fromStore;
+      }
       return homeProjects;
     },
   },

@@ -7,6 +7,7 @@
       <img
         :src="content.background_image.src"
         :srcset="$buildImageSrcset(content.background_image)"
+        :sizes="$buildImageSizes('hero')"
         :alt="
           content.background_image.alt !== ''
             ? content.background_image.alt

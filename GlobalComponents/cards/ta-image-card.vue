@@ -5,6 +5,7 @@
         :src="image && image.src ? image.src : '~/assets/images/banner_01.jpg'"
         :alt="image && image.alt ? image.alt : 'Tata Intellion'"
         :srcset="$buildImageSrcset(image)"
+        :sizes="$buildImageSizes(sizesContext)"
         data-aos="fade-in"
       />
     </div>
@@ -17,6 +18,7 @@
         "
         :alt="image.image && image.image.alt ? image.image.alt : 'Tata Intellion'"
         :srcset="$buildImageSrcset(image.image)"
+        :sizes="$buildImageSizes(sizesContext)"
         data-aos="fade-in"
       />
     </div>
@@ -43,7 +45,11 @@ export default {
     type: String,
     cardStyle: String,
     image: Object,
-    from: String
+    from: String,
+    sizesContext: {
+      type: String,
+      default: "fullSlider",
+    },
   },
   mounted() {}
 };

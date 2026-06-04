@@ -21,6 +21,12 @@
             ? content.background_image.src
             : '~/assets/images/banner_01.jpg'
         "
+        :data-srcset="
+          content.background_image && content.background_image.src
+            ? $buildImageSrcset(content.background_image)
+            : undefined
+        "
+        :data-sizes="$buildImageSizes('projectHoverCard')"
         v-lazy-load
         alt="Tata Intellion"
         class="ta__card--image"

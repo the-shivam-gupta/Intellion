@@ -11,6 +11,7 @@
           <img v-if="content.feature_image && content.feature_image.src"
             :src="content.feature_image.src"
             :srcset="$buildImageSrcset(content.feature_image)"
+            :sizes="$buildImageSizes('projectCard')"
             :alt="(content.feature_image.alt) ? content.feature_image.alt : 'blank alt'"
           />
           <div class="tag" v-if="content.filters.project_tag && content.filters.project_tag.name">{{ content.filters.project_tag.name }}</div>

@@ -21,6 +21,7 @@
           <img
             :src="slide.image.src"
             :srcset="$buildImageSrcset(slide.image, slide.sizes)"
+            :sizes="$buildImageSizes('banner')"
             alt="Tata Intellion"
             class="image"
             v-else
