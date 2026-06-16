@@ -30,32 +30,15 @@ export default {
     ],
 
     script: [
-      // Google Analytics (GA4)
       {
         src: "https://www.googletagmanager.com/gtag/js?id=G-FEWVE4GN6F",
         async: true
       },
       {
-        hid: "gtag-init",
-        innerHTML: `
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-FEWVE4GN6F');
-        `,
-        type: "text/javascript"
-      },
-
-      // SEO team requirement: ga.js
-      {
         src: "/ga.js",
         defer: true
       }
-    ],
-
-    __dangerouslyDisableSanitizersByTagID: {
-      "gtag-init": ["innerHTML"]
-    }
+    ]
   },
 
   // ------------------ GLOBAL CSS ------------------
