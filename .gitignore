@@ -90,6 +90,7 @@ sw.*
 *.swp
 
 .env
+encryption-private.pem
 
 .vscode/
 

@@ -1,4 +1,9 @@
 import https from "https";
+import {
+  encryptSensitivePayload,
+  shouldEncryptRequest,
+  toEncryptedApiPath
+} from "~/utils/encryptSensitivePayload";
 
 export default function({ $axios, app, redirect, store }) {
   // Dev only: local/corporate networks often fail Node TLS to webapi.intellion.in.
@@ -23,8 +28,24 @@ export default function({ $axios, app, redirect, store }) {
 
     return Promise.resolve(false);
   });
-  $axios.onRequest(req => {
+  $axios.onRequest(async (req) => {
     store.commit("updateGlobalLoader", true);
+
+    if (
+      process.client &&
+      req.method === "post" &&
+      req.data &&
+      shouldEncryptRequest(req.url || "")
+    ) {
+      req.data = await encryptSensitivePayload(
+        req.data,
+        app.$config.encryptionPublicKey
+      );
+      req.baseURL = "";
+      req.url = toEncryptedApiPath(req.url || "");
+    }
+
+    return req;
   });
   $axios.onResponse(response => {
     store.commit("updateGlobalLoader", false);

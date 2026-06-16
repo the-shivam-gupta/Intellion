@@ -1,8 +1,31 @@
 import webpack from "webpack";
+import { readFileSync, existsSync } from "fs";
+import { join } from "path";
+
+function loadEncryptionPublicKey() {
+  if (process.env.ENCRYPTION_PUBLIC_KEY) {
+    return process.env.ENCRYPTION_PUBLIC_KEY.replace(/\\n/g, "\n");
+  }
+
+  const keyPath = join(__dirname, "static/encryption-public.pem");
+
+  if (existsSync(keyPath)) {
+    return readFileSync(keyPath, "utf8");
+  }
+
+  console.warn(
+    "[encryption] static/encryption-public.pem not found; form encryption disabled until key is added"
+  );
+
+  return "";
+}
+
+const encryptionPublicKey = loadEncryptionPublicKey();
 
 export default {
   publicRuntimeConfig: {
-    apiKey: process.env.MAP_API
+    apiKey: process.env.MAP_API,
+    encryptionPublicKey
   },
 
   mode: "universal",
@@ -123,6 +146,7 @@ export default {
   },
 
   serverMiddleware: [
+    "~/server-middleware/form-proxy.js",
     "~/server-middleware/security-headers.js",
     "~/server-middleware/force-www.js"
   ],
