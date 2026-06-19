@@ -39,10 +39,12 @@
         >{{ pagemark.name }}</a>
       </li>
     </ul>
-    <div id="indicator" :style="[{ left: hoverDisplacement, width: hoverWidth }]"></div>
+    <div id="indicator"></div>
   </div>
 </template>
 <script>
+import { setCspDynamicStyle } from "~/utils/cspDynamicStyle";
+
 export default {
   props: {
     content: Array,
@@ -51,21 +53,21 @@ export default {
     city: String,
   },
   data() {
-    return {
-      hoverDisplacement: 0,
-      hoverWidth: 0,
-    };
+    return {};
   },
   methods: {
     showIndicator(args) {
-      this.hoverDisplacement =
-        document
-          .getElementsByClassName("pagemarks__list")[0]
-          .childNodes[args].getBoundingClientRect().left + "px";
-      this.hoverWidth =
-        document
-          .getElementsByClassName("pagemarks__list")[0]
-          .childNodes[args].getBoundingClientRect().width + "px";
+      const list = document.getElementsByClassName("pagemarks__list")[0];
+
+      if (!list || !list.childNodes[args]) {
+        return;
+      }
+
+      const rect = list.childNodes[args].getBoundingClientRect();
+      setCspDynamicStyle(
+        "pagemarks-indicator-style",
+        `#pagemarks #indicator { left: ${rect.left}px; width: ${rect.width}px; }`
+      );
     },
     scrollToTargetAdjusted(id) {
       if (id) {

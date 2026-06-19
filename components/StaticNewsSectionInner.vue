@@ -1,5 +1,5 @@
 <template>
-    <section id="news" class="section section-padding section-news-types section-news-sustainability" style="padding-top:0">
+    <section id="news" class="section section-padding section-news-types section-news-sustainability section-no-top-padding">
       <div class="container">
         <div class="container_brbt">
           <div class="row">

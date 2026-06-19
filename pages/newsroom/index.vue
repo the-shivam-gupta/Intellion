@@ -17,7 +17,7 @@
           v-model="activeNewsTab"
         >
         <div class="container">
-          <div class="row"  style="opacity: 1;">
+          <div class="row">
               <ta-breadcrumb
               id="breadcrumb"
               :content="pageDetails.banner_section.title"

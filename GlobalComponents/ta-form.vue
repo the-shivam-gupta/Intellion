@@ -82,11 +82,7 @@
           class="form-group"
           :class="[{ 'error-box': errors.city !== null },{isIos: $device.isIos}]"
         >
-          <label
-            style="transform: unset;
-    top: -20px;"
-            :style="{ display:$device.isIos?'none':'inline-block' }"
-          >Select City*</label>
+          <label class="form-dropdown-label">Select City*</label>
           <b-dropdown split id="dropdown-city" :text="cityLabel" class="ta__dropdown">
             <b-dropdown-item
               v-for="(city,index) in cities"
@@ -104,11 +100,7 @@
           class="form-group"
           :class="[{ 'error-box': errors.project !== null },{isIos: $device.isIos}]"
         >
-          <label
-            style="transform: unset;
-    top: -20px;"
-            :style="{ display:$device.isIos?'none':'inline-block' }"
-          >Project Interested*</label>
+          <label class="form-dropdown-label">Project Interested*</label>
           <b-dropdown
             split
             id="dropdown-project"

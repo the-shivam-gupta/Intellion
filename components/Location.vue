@@ -4,7 +4,7 @@
       <iframe
         width="100%"
         height="500"
-        style="border:0"
+        frameborder="0"
         loading="lazy"
         allowfullscreen
         :src="mapSrc">

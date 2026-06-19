@@ -1,6 +1,7 @@
 /**
  * VAPT 3.4: security response headers on every response.
- * CSP uses per-request nonces + strict-dynamic (no unsafe-inline / unsafe-eval in production).
+ * Strict CSP (no unsafe-inline / unsafe-eval) is applied in production only.
+ * Local dev skips CSP so webpack HMR can run.
  */
 const crypto = require("crypto");
 const { HSTS_VALUE, shouldSendHsts } = require("./security-constants");
@@ -9,12 +10,13 @@ function generateNonce() {
   return crypto.randomBytes(16).toString("base64");
 }
 
-function injectScriptNonce(html, nonce) {
+function injectHtmlNonces(html, nonce) {
   if (!html || !nonce) {
     return html;
   }
 
-  const trustedTypesBootstrap =
+  const headInjection =
+    `<meta name="csp-nonce" content="${nonce}">` +
     `<script nonce="${nonce}">` +
     "if(window.trustedTypes&&trustedTypes.createPolicy){" +
     "try{trustedTypes.createPolicy('default',{" +
@@ -24,42 +26,28 @@ function injectScriptNonce(html, nonce) {
     "})}catch(e){}}" +
     "</script>";
 
-  const withBootstrap = html.replace(
-    /<head([^>]*)>/i,
-    `<head$1>${trustedTypesBootstrap}`
-  );
+  let result = html.replace(/<head([^>]*)>/i, `<head$1>${headInjection}`);
 
-  return withBootstrap.replace(
+  result = result.replace(
     /<script(?![^>]*\bnonce=)/gi,
     `<script nonce="${nonce}"`
   );
+
+  result = result.replace(
+    /<style(?![^>]*\bnonce=)/gi,
+    `<style nonce="${nonce}"`
+  );
+
+  return result;
 }
 
 function buildContentSecurityPolicy(isProduction, nonce) {
-  const scriptParts = [
-    "'self'",
-    "'strict-dynamic'",
-    `'nonce-${nonce}'`,
-    "https://www.googletagmanager.com",
-    "https://www.google-analytics.com",
-    "https://maps.googleapis.com",
-    "https://maps.gstatic.com"
-  ];
-
-  // Webpack HMR in local dev still needs eval.
-  if (!isProduction) {
-    scriptParts.push("'unsafe-eval'");
-  }
-
-  const directives = [
+  const sharedDirectives = [
     "default-src 'self' https://*.intellion.in",
     "base-uri 'self'",
     "form-action 'self'",
     "object-src 'none'",
     "frame-ancestors 'none'",
-    `script-src ${scriptParts.join(" ")}`,
-    "require-trusted-types-for 'script'",
-    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
     "img-src 'self' data: blob: https://*.intellion.in https://intellion.s3.ap-south-1.amazonaws.com https:",
     "font-src 'self' data: https://fonts.gstatic.com",
     "connect-src 'self' https://webapi.intellion.in https://media.intellion.in https://intellion.s3.ap-south-1.amazonaws.com https://www.google-analytics.com https://analytics.google.com https://www.google.com https://www.googletagmanager.com https://region1.google-analytics.com https://maps.googleapis.com",
@@ -67,11 +55,26 @@ function buildContentSecurityPolicy(isProduction, nonce) {
     "media-src 'self' https:"
   ];
 
-  if (isProduction) {
-    directives.push("upgrade-insecure-requests");
+  if (!isProduction) {
+    return null;
   }
 
-  return directives.join("; ");
+  const scriptHosts = [
+    "https://www.googletagmanager.com",
+    "https://www.google-analytics.com",
+    "https://maps.googleapis.com",
+    "https://maps.gstatic.com"
+  ].join(" ");
+
+  return [
+    ...sharedDirectives,
+    `script-src-elem 'self' 'nonce-${nonce}' ${scriptHosts}`,
+    `script-src 'self' 'nonce-${nonce}' ${scriptHosts}`,
+    "require-trusted-types-for 'script'",
+    `style-src 'self' 'nonce-${nonce}' https://fonts.googleapis.com`,
+    "style-src-attr 'unsafe-hashes' 'sha256-biLFinpqYMtWHmXfkA1BPeCY0/fNt46SAZ+BBk5YUog=' 'sha256-0EZqoz+oBhx7gF4nvY2bSqoGyy4zLjNF+SDQXGp/ZrY=' 'sha256-aqNNdDLnnrDOnTNdkJpYlAxKVJtLt9CtFLklmInuUAE='",
+    "upgrade-insecure-requests"
+  ].join("; ");
 }
 
 function applySecurityHeaders(res, isProduction, nonce, req) {
@@ -83,17 +86,19 @@ function applySecurityHeaders(res, isProduction, nonce, req) {
     "Permissions-Policy",
     "camera=(), microphone=(), geolocation=(), payment=()"
   );
-  res.setHeader(
-    "Content-Security-Policy",
-    buildContentSecurityPolicy(isProduction, nonce)
-  );
+
+  const csp = buildContentSecurityPolicy(isProduction, nonce);
+
+  if (csp) {
+    res.setHeader("Content-Security-Policy", csp);
+  }
 
   if (shouldSendHsts(req)) {
     res.setHeader("Strict-Transport-Security", HSTS_VALUE);
   }
 }
 
-function interceptHtmlBody(res, nonce, applyHeaders) {
+function interceptHtmlBody(res, nonce, applyHeaders, isProduction) {
   if (res._cspHtmlWrapped) {
     return;
   }
@@ -139,8 +144,13 @@ function interceptHtmlBody(res, nonce, applyHeaders) {
     let body = chunks.length ? Buffer.concat(chunks) : null;
     const contentType = res.getHeader("content-type");
 
-    if (body && contentType && String(contentType).includes("text/html")) {
-      const html = injectScriptNonce(body.toString("utf8"), nonce);
+    if (
+      body &&
+      isProduction &&
+      contentType &&
+      String(contentType).includes("text/html")
+    ) {
+      const html = injectHtmlNonces(body.toString("utf8"), nonce);
       body = Buffer.from(html, "utf8");
       res.setHeader("Content-Length", body.length);
     }
@@ -164,7 +174,7 @@ module.exports = function securityHeaders(req, res, next) {
   };
 
   applyHeaders();
-  interceptHtmlBody(res, nonce, applyHeaders);
+  interceptHtmlBody(res, nonce, applyHeaders, isProduction);
 
   const originalWriteHead = res.writeHead;
   res.writeHead = function writeHead() {

@@ -14,7 +14,7 @@
             playsinline="playsinline"
             muted="muted"
             autoplay="autoplay"
-            :style="'background-image:url(' + slide.image.src + ')'"
+            :poster="slide.image.src"
             :src="slide.video_file_url"
             v-if="slide.video_file_url"
           ></video>

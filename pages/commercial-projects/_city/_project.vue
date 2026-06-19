@@ -372,7 +372,7 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="news_type">
-            <div class="news_type_title" style="color:#363e4a">Approvals</div>
+            <div class="news_type_title news-type-title">Approvals</div>
             <!--<div class="nt_view">
                    <button type="button" @click="openTab(1)">
                      {{ pageDetails.sections.policies.button.text }}

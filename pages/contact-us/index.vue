@@ -94,10 +94,7 @@
                             class="form-group"
                             :class="[{ 'error-box': errors.country !== null },{isIos: $device.isIos}]"
                           >
-                            <label
-                              style="transform: unset; top: -20px;"
-                              :style="{ display:$device.isIos?'none':'inline-block' }"
-                            >Country*</label>
+                            <label class="form-dropdown-label">Country*</label>
                             <b-dropdown
                               split
                               id="dropdown-country"

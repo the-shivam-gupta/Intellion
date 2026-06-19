@@ -6,7 +6,7 @@
         class="ta__card primary"
         :class="$device.isMobileOrTablet ? 'is_touch' : ''"
       >
-        <div class="ta__card--image" style="background-color: #ccc">
+        <div class="ta__card--image card-image-placeholder">
           <img
             v-if="content.feature_image && content.feature_image.src"
             :src="content.feature_image.src"

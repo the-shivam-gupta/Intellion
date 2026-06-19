@@ -179,3 +179,13 @@ input[type=email]::-ms-clear {
 input[type=text] {
   background-image: none !important;
 }
+
+.form-dropdown-label {
+  transform: unset;
+  top: -20px;
+  display: inline-block;
+}
+
+.form-group.isIos .form-dropdown-label {
+  display: none;
+}

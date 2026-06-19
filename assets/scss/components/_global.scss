@@ -596,6 +596,18 @@ a {
 }
 
 
+.card-image-placeholder {
+  background-color: #ccc;
+}
+
+.section-no-top-padding {
+  padding-top: 0;
+}
+
+.news-type-title {
+  color: #363e4a;
+}
+
 //overwrite bootstrap modal css
 body.modal-open-noscroll {
   margin-right: 0 !important;

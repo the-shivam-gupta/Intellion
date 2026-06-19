@@ -1,6 +1,6 @@
 <template>
   <header class="ta__header" :class="resizeLogo ? 'sticky' : ''">
-    <div v-show="$store.state.toggleSearch">
+    <div v-if="$store.state.toggleSearch">
       <ta-search-popup></ta-search-popup>
     </div>
     <div class="ta__header--pre">
@@ -39,7 +39,7 @@
       @mouseenter="isNavHovered = true;freezeBackground(true);"
       @mouseleave="
         isNavHovered = false;
-        (hoverDisplacement = 0), (hoverWidth = 0);
+        resetIndicator();
         freezeBackground(false);
       "
     >
@@ -157,17 +157,14 @@
               </g>
             </svg>
           </div>
-          <div
-            id="indicator"
-            :style="[{ left: hoverDisplacement, width: hoverWidth }]"
-          ></div>
+          <div id="indicator"></div>
         </nav>
         <div
           class="ta__submenu"
           :class="showSubmenu ? 'active' : ''"
           @mouseleave="
             showSubmenu = false;
-            (hoverDisplacement = 0), (hoverWidth = 0);
+            resetIndicator();
           "
         >
           <div class="wrapper">
@@ -452,6 +449,8 @@
   </header>
 </template>
 <script>
+import { setCspDynamicStyle } from "~/utils/cspDynamicStyle";
+
 export default {
   data() {
     return {
@@ -465,8 +464,6 @@ export default {
       toggleMenu: false,
       isNavHovered: false,
       scrollWidth: 0,
-      hoverDisplacement: 0,
-      hoverWidth: 0,
       showSubmenu: false,
       showOptions: false,
       submenuContent: false,
@@ -635,18 +632,24 @@ export default {
         this.resizeLogo = true;
       }
     },
+    resetIndicator() {
+      setCspDynamicStyle(
+        "header-nav-indicator-style",
+        "#indicator { left: 0; width: 0; }"
+      );
+    },
     showIndicator(args) {
-      let element = document.querySelectorAll("." + args);
-      this.hoverDisplacement = element[0].getBoundingClientRect().left + "px";
-      this.hoverWidth = element[0].getBoundingClientRect().width + "px";
-      // this.hoverDisplacement =
-      //   document
-      //     .getElementsByClassName("nav__list")[0]
-      //     .childNodes[args].getBoundingClientRect().left + "px";
-      // this.hoverWidth =
-      //   document
-      //     .getElementsByClassName("nav__list")[0]
-      //     .childNodes[args].getBoundingClientRect().width + "px";
+      const element = document.querySelectorAll("." + args);
+
+      if (!element.length) {
+        return;
+      }
+
+      const rect = element[0].getBoundingClientRect();
+      setCspDynamicStyle(
+        "header-nav-indicator-style",
+        `#indicator { left: ${rect.left}px; width: ${rect.width}px; }`
+      );
     },
   },
   mounted() {

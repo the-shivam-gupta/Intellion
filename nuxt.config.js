@@ -75,6 +75,7 @@ export default {
 
   // ------------------ PLUGINS ------------------
   plugins: [
+    { src: "~/plugins/csp-nonce.client.js", mode: "client" },
     "~/plugins/axios.js",
     "~/plugins/imageSrcset.js",
     "~/plugins/onload.component.js",
