@@ -25,6 +25,11 @@ export const validateNumber = number => {
   var re = /^[0]?[1-9]\d{9}$/;
   return re.test(String(number));
 };
+
+export const containsHtmlTags = value => {
+  return typeof value === "string" && /<[^>]+>/i.test(value);
+};
+
 export const autoFocusInput = fieldId => {
   document.getElementById(fieldId).focus();
 };

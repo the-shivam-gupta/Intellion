@@ -165,6 +165,7 @@
                         </div>
                         <div class="col-lg-12">
                           <button class="ta__btn ta__btn--primary" id="btn__contact__submit" :disabled="!isValid">submit</button>
+                          <span v-if="submitError" class="error d-block mt-2">{{ submitError }}</span>
                         </div>
                       </div>
                     </b-form>
@@ -250,6 +251,7 @@ import {
   validateEmail,
   validateNumber,
   autoFocusInput,
+  containsHtmlTags,
 } from "~/middleware/utils";
 import { countries } from "~/js/countries";
 export default {
@@ -287,6 +289,7 @@ export default {
         phone: "",
         message: "",
       },
+      submitError: null,
     };
   },
   computed: {
@@ -312,7 +315,7 @@ export default {
   },
   methods: {
     autoFocusInput: autoFocusInput,
-    contact: function (e) {
+    contact: async function (e) {
       e.preventDefault();
       if (
         !isNotEmpty(this.contactForm.fullname) ||
@@ -325,6 +328,8 @@ export default {
           this.errors.fullname = "Please enter name";
         } else if (!validateName(this.contactForm.fullname)) {
           this.errors.fullname = "Name should contain alphabets only";
+        } else if (containsHtmlTags(this.contactForm.fullname)) {
+          this.errors.fullname = "HTML tags are not allowed";
         } else {
           this.errors.fullname = null;
         }
@@ -332,6 +337,8 @@ export default {
         //validate message
         if (!isNotEmpty(this.contactForm.message)) {
           this.errors.message = "Please enter message";
+        } else if (containsHtmlTags(this.contactForm.message)) {
+          this.errors.message = "HTML tags are not allowed";
         } else if (this.contactForm.message.length > 150) {
           this.errors.message = "Message Limit in 150 characters";
         } else {
@@ -355,6 +362,18 @@ export default {
         } else {
           this.errors.phone = null;
         }
+      } else if (
+        containsHtmlTags(this.contactForm.fullname) ||
+        containsHtmlTags(this.contactForm.message)
+      ) {
+        if (containsHtmlTags(this.contactForm.fullname)) {
+          this.errors.fullname = "HTML tags are not allowed";
+        }
+        if (containsHtmlTags(this.contactForm.message)) {
+          this.errors.message = "HTML tags are not allowed";
+        }
+        this.isValid = false;
+        this.submitError = "HTML tags are not allowed";
       } else {
         this.errors = {
           fullname: null,
@@ -363,6 +382,7 @@ export default {
           phone: null,
           message: null,
         };
+        this.submitError = null;
         let payload = {
           full_name: this.contactForm.fullname,
           email: this.contactForm.email,
@@ -370,8 +390,12 @@ export default {
           phone_number: this.contactForm.phone,
           message: this.contactForm.message,
         };
-        // this.isValid = true;
-        this.$store.dispatch("contact/contactForm", payload);
+        const result = await this.$store.dispatch("contact/contactForm", payload);
+        if (result && !result.success) {
+          this.submitError = result.message;
+        } else {
+          this.submitError = null;
+        }
       }
     },
     isValidForm(field) {
@@ -382,6 +406,8 @@ export default {
             this.errors.fullname = "Please enter name";
           } else if (!validateName(this.contactForm.fullname)) {
             this.errors.fullname = "Name should contain alphabets only";
+          } else if (containsHtmlTags(this.contactForm.fullname)) {
+            this.errors.fullname = "HTML tags are not allowed";
           } else {
             this.errors.fullname = null;
           }
@@ -398,6 +424,8 @@ export default {
         case "message":
           if (!isNotEmpty(this.contactForm.message)) {
             this.errors.message = "Please enter message";
+          } else if (containsHtmlTags(this.contactForm.message)) {
+            this.errors.message = "HTML tags are not allowed";
           } else if (this.contactForm.message.length > 150) {
             this.errors.message = "Message Limit in 150 characters";
           } else {

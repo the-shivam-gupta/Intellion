@@ -3,6 +3,7 @@
  * CSP uses per-request nonces + strict-dynamic (no unsafe-inline / unsafe-eval in production).
  */
 const crypto = require("crypto");
+const { HSTS_VALUE, shouldSendHsts } = require("./security-constants");
 
 function generateNonce() {
   return crypto.randomBytes(16).toString("base64");
@@ -73,7 +74,7 @@ function buildContentSecurityPolicy(isProduction, nonce) {
   return directives.join("; ");
 }
 
-function applySecurityHeaders(res, isProduction, nonce) {
+function applySecurityHeaders(res, isProduction, nonce, req) {
   res.setHeader("X-Frame-Options", "DENY");
   res.setHeader("X-Content-Type-Options", "nosniff");
   res.setHeader("X-XSS-Protection", "1; mode=block");
@@ -87,11 +88,8 @@ function applySecurityHeaders(res, isProduction, nonce) {
     buildContentSecurityPolicy(isProduction, nonce)
   );
 
-  if (isProduction) {
-    res.setHeader(
-      "Strict-Transport-Security",
-      "max-age=31536000; includeSubDomains; preload"
-    );
+  if (shouldSendHsts(req)) {
+    res.setHeader("Strict-Transport-Security", HSTS_VALUE);
   }
 }
 
@@ -161,7 +159,7 @@ module.exports = function securityHeaders(req, res, next) {
 
   const applyHeaders = () => {
     if (!res.headersSent) {
-      applySecurityHeaders(res, isProduction, nonce);
+      applySecurityHeaders(res, isProduction, nonce, req);
     }
   };
 

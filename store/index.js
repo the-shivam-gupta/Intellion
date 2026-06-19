@@ -1,3 +1,5 @@
+import { getApiErrorMessage } from "~/utils/apiError";
+
 export const state = () => ({
   pageLoadData: null,
   video_url: "",
@@ -146,9 +148,21 @@ export const actions = {
         this.$router.push({
           path: "/thank-you"
         });
+        return { success: true };
       }
+
+      return {
+        success: false,
+        message: "Unable to submit your enquiry. Please try again later."
+      };
     } catch (error) {
-      console.log(error, error);
+      return {
+        success: false,
+        message: getApiErrorMessage(
+          error,
+          "Unable to submit your enquiry. Please try again later."
+        )
+      };
     }
   },
   async updateMeta({ commit }, metaData) {

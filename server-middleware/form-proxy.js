@@ -4,6 +4,10 @@ const {
   decryptSensitivePayload,
   isEncryptedPayload
 } = require("../utils/decryptSensitivePayload");
+const {
+  payloadContainsHtml,
+  sanitizeFormPayload
+} = require("../utils/formInputSecurity");
 
 const API_BASE = (
   process.env.BASE_URL || "https://webapi.intellion.in/wp-json/intellion/v1"
@@ -30,7 +34,8 @@ function readRequestBody(req) {
 function forwardToApi(route, body) {
   const target = new URL(`${API_BASE}${route}`);
   const payload = JSON.stringify(body);
-  const isDev = process.env.NODE_ENV === "development";
+  const isDev =
+    process.env.NODE_ENV === "development" || process.dev === true;
 
   return new Promise((resolve, reject) => {
     const request = https.request(
@@ -42,6 +47,7 @@ function forwardToApi(route, body) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Accept: "application/json",
           "Content-Length": Buffer.byteLength(payload)
         },
         agent: isDev
@@ -81,7 +87,22 @@ module.exports = async function formProxy(req, res, next) {
     const decryptedBody = isEncryptedPayload(parsedBody)
       ? decryptSensitivePayload(parsedBody)
       : parsedBody;
-    const apiResponse = await forwardToApi(apiRoute, decryptedBody);
+
+    if (payloadContainsHtml(decryptedBody)) {
+      res.statusCode = 400;
+      res.setHeader("Content-Type", "application/json");
+      res.end(
+        JSON.stringify({
+          message: "HTML tags are not allowed"
+        })
+      );
+      return;
+    }
+
+    const apiResponse = await forwardToApi(
+      apiRoute,
+      sanitizeFormPayload(decryptedBody)
+    );
 
     res.statusCode = apiResponse.statusCode;
     res.setHeader("Content-Type", "application/json");

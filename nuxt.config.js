@@ -146,8 +146,8 @@ export default {
   },
 
   serverMiddleware: [
-    "~/server-middleware/form-proxy.js",
     "~/server-middleware/security-headers.js",
+    "~/server-middleware/form-proxy.js",
     "~/server-middleware/force-www.js"
   ],
 

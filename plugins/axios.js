@@ -37,6 +37,7 @@ export default function({ $axios, app, redirect, store }) {
       req.data &&
       shouldEncryptRequest(req.url || "")
     ) {
+      req.skipErrorRedirect = true;
       req.data = await encryptSensitivePayload(
         req.data,
         app.$config.encryptionPublicKey

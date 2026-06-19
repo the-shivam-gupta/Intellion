@@ -1,4 +1,5 @@
 module.exports = function forceWww(req, res, next) {
+  const { HSTS_VALUE, isHttpsRequest, shouldSendHsts } = require("./security-constants");
   const rawHost = req.headers.host || "";
   const host = rawHost.split(":")[0];
   const url = req.url;
@@ -24,37 +25,31 @@ module.exports = function forceWww(req, res, next) {
     return next();
   }
 
-  const isHttps = (() => {
-    const xfProto = req.headers["x-forwarded-proto"];
-    if (xfProto) {
-      return xfProto.split(",")[0].trim().toLowerCase() === "https";
+  const isHttps = isHttpsRequest(req);
+
+  const redirect = (location) => {
+    const headers = { Location: location };
+
+    if (shouldSendHsts(req)) {
+      headers["Strict-Transport-Security"] = HSTS_VALUE;
     }
-    const cfVisitor = req.headers["cf-visitor"];
-    if (cfVisitor) {
-      try {
-        return JSON.parse(cfVisitor).scheme === "https";
-      } catch (_) {
-        /* ignore malformed header */
-      }
-    }
-    return !!(req.connection && req.connection.encrypted);
-  })();
+
+    res.writeHead(301, headers);
+    return res.end();
+  };
 
   // Staging / alternate hosts: stay on same host; only upgrade HTTP → HTTPS when needed.
   if (allowedHosts.has(host)) {
     if (!isHttps) {
-      res.writeHead(301, { Location: `https://${host}${url}` });
-      return res.end();
+      return redirect(`https://${host}${url}`);
     }
     return next();
   }
 
   // Unknown hosts in production → canonical www site.
   if (!isHttps) {
-    res.writeHead(301, { Location: canonicalOrigin + url });
-    return res.end();
+    return redirect(canonicalOrigin + url);
   }
 
-  res.writeHead(301, { Location: canonicalOrigin + url });
-  return res.end();
+  return redirect(canonicalOrigin + url);
 };

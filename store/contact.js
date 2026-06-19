@@ -1,3 +1,8 @@
+import {
+  getApiErrorMessage,
+  isSavedDespiteServerError
+} from "~/utils/apiError";
+
 export const state = () => ({
   contactPage: {}
 });
@@ -29,9 +34,28 @@ export const actions = {
         this.$router.push({
           path: "/thank-you"
         });
+        return { success: true };
       }
+
+      return {
+        success: false,
+        message: "Unable to send your message. Please try again later."
+      };
     } catch (error) {
-      console.log(error, error);
+      if (isSavedDespiteServerError(error)) {
+        this.$router.push({
+          path: "/thank-you"
+        });
+        return { success: true };
+      }
+
+      return {
+        success: false,
+        message: getApiErrorMessage(
+          error,
+          "Unable to send your message. Please try again later."
+        )
+      };
     }
   },
 
@@ -42,11 +66,21 @@ export const actions = {
         this.$router.push({
           path: "/thank-you"
         });
-      } else {
-        return res;
+        return { success: true };
       }
+
+      return {
+        success: false,
+        message: "Unable to subscribe. Please try again later."
+      };
     } catch (error) {
-      console.log(error, error);
+      return {
+        success: false,
+        message: getApiErrorMessage(
+          error,
+          "Unable to subscribe. Please try again later."
+        )
+      };
     }
   }
 };

@@ -1,4 +1,5 @@
 const ENCRYPTED_ENDPOINTS = ["/query", "/enquiry", "/subscribe"];
+import { sanitizeFormPayload } from "./formInputSecurity";
 
 function bufferToBase64(buffer) {
   const bytes = new Uint8Array(buffer);
@@ -52,30 +53,6 @@ export function toEncryptedApiPath(url = "") {
   );
 
   return endpoint ? `/api${endpoint}` : url;
-}
-
-export function sanitizeFormValue(value) {
-  if (typeof value !== "string") {
-    return value;
-  }
-
-  return value.replace(/<[^>]*>/g, "").trim();
-}
-
-export function sanitizeFormPayload(payload) {
-  if (!payload || typeof payload !== "object") {
-    return payload;
-  }
-
-  const sanitized = { ...payload };
-
-  Object.keys(sanitized).forEach((key) => {
-    if (typeof sanitized[key] === "string") {
-      sanitized[key] = sanitizeFormValue(sanitized[key]);
-    }
-  });
-
-  return sanitized;
 }
 
 export async function encryptSensitivePayload(payload, publicKeyPem) {

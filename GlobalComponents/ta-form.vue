@@ -154,6 +154,7 @@
       <div class="col-lg-12">
         <!-- <ta-cta btnStyle="ta__btn--primary" type="submit" text="submit"></ta-cta> -->
         <button class="ta__btn ta__btn--primary" id="btn__enquire__submit" :disabled="!isValid">submit</button>
+        <span v-if="submitError" class="error d-block mt-2">{{ submitError }}</span>
       </div>
     </div>
   </b-form>
@@ -165,6 +166,7 @@ import {
   validateEmail,
   validateNumber,
   autoFocusInput,
+  containsHtmlTags,
 } from "~/middleware/utils";
 export default {
   props: {
@@ -205,11 +207,12 @@ export default {
         phone: "",
         message: "",
       },
+      submitError: null,
     };
   },
   methods: {
     autoFocusInput: autoFocusInput,
-    submit: function (e) {
+    submit: async function (e) {
       e.preventDefault();
       if (
         !isNotEmpty(this.enquireForm.fullname) ||
@@ -222,6 +225,8 @@ export default {
           this.errors.fullname = "Please enter name";
         } else if (!validateName(this.enquireForm.fullname)) {
           this.errors.fullname = "Name should contain alphabets only";
+        } else if (containsHtmlTags(this.enquireForm.fullname)) {
+          this.errors.fullname = "HTML tags are not allowed";
         } else {
           this.errors.fullname = null;
         }
@@ -229,6 +234,8 @@ export default {
         //validate message
         if (!isNotEmpty(this.enquireForm.message)) {
           this.errors.message = "Please enter message";
+        } else if (containsHtmlTags(this.enquireForm.message)) {
+          this.errors.message = "HTML tags are not allowed";
         } else if (this.enquireForm.message.length > 150) {
           this.errors.message = "Message Limit in 150 characters";
         } else {
@@ -252,6 +259,18 @@ export default {
         } else {
           this.errors.phone = null;
         }
+      } else if (
+        containsHtmlTags(this.enquireForm.fullname) ||
+        containsHtmlTags(this.enquireForm.message)
+      ) {
+        if (containsHtmlTags(this.enquireForm.fullname)) {
+          this.errors.fullname = "HTML tags are not allowed";
+        }
+        if (containsHtmlTags(this.enquireForm.message)) {
+          this.errors.message = "HTML tags are not allowed";
+        }
+        this.isValid = false;
+        this.submitError = "HTML tags are not allowed";
       } else {
         this.errors = {
           fullname: null,
@@ -260,6 +279,7 @@ export default {
           phone: null,
           message: null,
         };
+        this.submitError = null;
         let payload = {
           full_name: this.enquireForm.fullname,
           email: this.enquireForm.email,
@@ -268,12 +288,16 @@ export default {
           project: this.enquireForm.project,
           message: this.enquireForm.message,
         };
-        // this.isValid = true;
-        this.$store.dispatch("submitEnquiry", payload);
-        this.enquireForm.fullname = '';
-        this.enquireForm.email = '';
-        this.enquireForm.phone = '';
-        this.enquireForm.message = '';
+        const result = await this.$store.dispatch("submitEnquiry", payload);
+        if (result && result.success) {
+          this.enquireForm.fullname = "";
+          this.enquireForm.email = "";
+          this.enquireForm.phone = "";
+          this.enquireForm.message = "";
+          this.submitError = null;
+        } else if (result && !result.success) {
+          this.submitError = result.message;
+        }
       }
     },
     isValidForm(field) {
@@ -284,6 +308,8 @@ export default {
             this.errors.fullname = "Please enter name";
           } else if (!validateName(this.enquireForm.fullname)) {
             this.errors.fullname = "Name should contain alphabets only";
+          } else if (containsHtmlTags(this.enquireForm.fullname)) {
+            this.errors.fullname = "HTML tags are not allowed";
           } else {
             this.errors.fullname = null;
           }
@@ -300,6 +326,8 @@ export default {
         case "message":
           if (!isNotEmpty(this.enquireForm.message)) {
             this.errors.message = "Please enter message";
+          } else if (containsHtmlTags(this.enquireForm.message)) {
+            this.errors.message = "HTML tags are not allowed";
           } else if (this.enquireForm.message.length > 150) {
             this.errors.message = "Message Limit in 150 characters";
           } else {
