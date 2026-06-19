@@ -12,6 +12,7 @@
       ref="enquiry-modal"
       v-model="showFormModal"
       no-close-on-backdrop
+      @hidden="onEnquiryModalHidden"
     >
       <template v-slot:modal-header="{ close }">
         <button class="ta__btn ta__btn--transparent" @click="close()">
@@ -74,13 +75,31 @@ export default {
       this.showLoader = val;
     },
     "$store.state.showEnquiryModal": function(val) {
-      // if (!val) {
-      //   this.$refs["enquiry-modal"].hide();
-      // }
       this.showFormModal = val;
+      if (!val && this.$refs["enquiry-modal"]) {
+        this.$refs["enquiry-modal"].hide();
+      }
     },
     "$store.state.video_url": function(val) {
       this.actualUrl = val;
+    },
+    "$route.name": function(name) {
+      if (name === "thank-you") {
+        this.closeEnquiryModal();
+      }
+    }
+  },
+  methods: {
+    closeEnquiryModal() {
+      this.showFormModal = false;
+      this.$store.commit("updateEnquiryModal", false);
+      if (this.$refs["enquiry-modal"]) {
+        this.$refs["enquiry-modal"].hide();
+      }
+    },
+    onEnquiryModalHidden() {
+      this.showFormModal = false;
+      this.$store.commit("updateEnquiryModal", false);
     }
   },
   mounted() {

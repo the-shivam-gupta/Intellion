@@ -8,6 +8,7 @@ const {
   payloadContainsHtml,
   sanitizeFormPayload
 } = require("../utils/formInputSecurity");
+const { normalizeFormApiResponse } = require("../utils/formSubmissionResponse");
 
 const API_BASE = (
   process.env.BASE_URL || "https://webapi.intellion.in/wp-json/intellion/v1"
@@ -103,10 +104,14 @@ module.exports = async function formProxy(req, res, next) {
       apiRoute,
       sanitizeFormPayload(decryptedBody)
     );
+    const normalizedResponse = normalizeFormApiResponse(
+      apiResponse.statusCode,
+      apiResponse.body
+    );
 
-    res.statusCode = apiResponse.statusCode;
+    res.statusCode = normalizedResponse.statusCode;
     res.setHeader("Content-Type", "application/json");
-    res.end(apiResponse.body);
+    res.end(normalizedResponse.body);
   } catch (error) {
     res.statusCode = 400;
     res.setHeader("Content-Type", "application/json");

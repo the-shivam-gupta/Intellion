@@ -1,4 +1,4 @@
-const EMAIL_FAILURE_PATTERN = /feedback could not sent/i;
+const EMAIL_FAILURE_PATTERN = /feedback could not sent|something went wrong/i;
 
 function parseJsonBody(body) {
   if (!body) {

@@ -295,6 +295,9 @@ export default {
           this.enquireForm.phone = "";
           this.enquireForm.message = "";
           this.submitError = null;
+          if (this.from === "enquire" && this.$bvModal) {
+            this.$bvModal.hide("enquiry-modal");
+          }
         } else if (result && !result.success) {
           this.submitError = result.message;
         }

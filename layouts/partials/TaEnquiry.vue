@@ -1,6 +1,6 @@
 <template>
   <div class="ta__enquiry--wrapper" id="enquiry" :class="!isVisible?'hide':''">
-    <ta-cta text="ENQUIRE NOW" btnStyle="ta__btn--dark" v-b-modal="'enquiry-modal'"></ta-cta>
+    <ta-cta text="ENQUIRE NOW" btnStyle="ta__btn--dark" @click.native="openFormModal"></ta-cta>
   </div>
 </template>
 <script>

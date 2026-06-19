@@ -29,5 +29,5 @@ export function isSavedDespiteServerError(error) {
 
   const message = getApiErrorMessage(error, "");
 
-  return /feedback could not sent/i.test(message);
+  return /feedback could not sent|something went wrong/i.test(message);
 }

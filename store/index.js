@@ -1,4 +1,7 @@
-import { getApiErrorMessage } from "~/utils/apiError";
+import {
+  getApiErrorMessage,
+  isSavedDespiteServerError
+} from "~/utils/apiError";
 
 export const state = () => ({
   pageLoadData: null,
@@ -156,6 +159,14 @@ export const actions = {
         message: "Unable to submit your enquiry. Please try again later."
       };
     } catch (error) {
+      if (isSavedDespiteServerError(error)) {
+        commit("updateEnquiryModal", false);
+        this.$router.push({
+          path: "/thank-you"
+        });
+        return { success: true };
+      }
+
       return {
         success: false,
         message: getApiErrorMessage(
