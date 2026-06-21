@@ -41,8 +41,8 @@ export default {
       htmlAttrs: {
         lang: "en",
       },
-      title: this.$store.state.metaTitle || "TATA Intellion - Thank You",
-      meta: this.$store.state.meta,
+      title: this.metaTitle,
+      meta: this.pageMeta,
       link: this.$store.state.link
     };
   },
@@ -52,6 +52,26 @@ export default {
   computed: {
     page: function () {
       return this.$store.getters.thankPage;
+    },
+    metaTitle() {
+      const title = this.$store.state.metaTitle;
+      if (title && !/%%/.test(title)) {
+        return title;
+      }
+      return "TATA Intellion - Thank You";
+    },
+    pageMeta() {
+      const title = this.metaTitle;
+      return (this.$store.state.meta || []).map((item) => {
+        if (
+          item.hid === "title" ||
+          item.hid === "og:title" ||
+          item.hid === "twitter:title"
+        ) {
+          return { ...item, content: title };
+        }
+        return item;
+      });
     },
   },
 };

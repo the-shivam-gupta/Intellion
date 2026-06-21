@@ -4,10 +4,58 @@
  * Local dev skips CSP so webpack HMR can run.
  */
 const crypto = require("crypto");
-const { HSTS_VALUE, shouldSendHsts } = require("./security-constants");
+const {
+  HSTS_VALUE,
+  isLocalDevHost,
+  shouldSendHsts
+} = require("./security-constants");
 
 function generateNonce() {
   return crypto.randomBytes(16).toString("base64");
+}
+
+const STYLE_ATTR_HASHES = [
+  // ta-select.vue display toggles
+  "'sha256-biLFinpqYMtWHmXfkA1BPeCY0/fNt46SAZ+BBk5YUog='",
+  "'sha256-0EZqoz+oBhx7gF4nvY2bSqoGyy4zLjNF+SDQXGp/ZrY='",
+  "'sha256-aqNNdDLnnrDOnTNdkJpYlAxKVJtLt9CtFLklmInuUAE='",
+  // GSAP / AOS clear inline styles (cssText = "")
+  "'sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU='",
+  // Runtime inline style from lazy-loaded vendor chunk (628cabb.js)
+  "'sha256-8IhDsk1m3zyem/Xsc/sWSEC4XDH2O3K+Pj+1+TvtK8='"
+];
+
+const CSP_NONCE_START = "<!--csp-nonce-start-->";
+const CSP_NONCE_END = "<!--csp-nonce-end-->";
+
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function buildCspBootstrapScript(nonce) {
+  const escapedNonce = nonce.replace(/\\/g, "\\\\").replace(/"/g, '\\"');
+
+  return [
+    `(function(n){`,
+    `if(!n){return;}`,
+    `window.__webpack_nonce__=n;`,
+    `document.documentElement.dataset.cspStyleNonceApplied="1";`,
+    `var orig=Document.prototype.createElement;`,
+    `Document.prototype.createElement=function(tag,options){`,
+    `var el=orig.call(this,tag,options);`,
+    `if(tag&&String(tag).toLowerCase()==="style"){el.setAttribute("nonce",n);}`,
+    `return el};`,
+    `function mark(node){`,
+    `if(!node||node.nodeType!==1){return;}`,
+    `if(node.tagName==="STYLE"&&!node.getAttribute("nonce")){node.setAttribute("nonce",n);}`,
+    `for(var i=0;i<node.children.length;i++){mark(node.children[i]);}}`,
+    `mark(document.documentElement);`,
+    `new MutationObserver(function(list){`,
+    `for(var i=0;i<list.length;i++){`,
+    `for(var j=0;j<list[i].addedNodes.length;j++){mark(list[i].addedNodes[j]);}}`,
+    `}).observe(document.documentElement,{childList:true,subtree:true});`,
+    `})("${escapedNonce}");`
+  ].join("");
 }
 
 function injectHtmlNonces(html, nonce) {
@@ -15,18 +63,32 @@ function injectHtmlNonces(html, nonce) {
     return html;
   }
 
-  const headInjection =
-    `<meta name="csp-nonce" content="${nonce}">` +
-    `<script nonce="${nonce}">` +
-    "if(window.trustedTypes&&trustedTypes.createPolicy){" +
-    "try{trustedTypes.createPolicy('default',{" +
-    "createHTML:function(s){return s}," +
-    "createScript:function(s){return s}," +
-    "createScriptURL:function(s){return s}" +
-    "})}catch(e){}}" +
-    "</script>";
+  let result = html;
 
-  let result = html.replace(/<head([^>]*)>/i, `<head$1>${headInjection}`);
+  // Cached HTML may contain a previous request's nonce injection block.
+  const injectionBlock = new RegExp(
+    `${escapeRegExp(CSP_NONCE_START)}[\\s\\S]*?${escapeRegExp(CSP_NONCE_END)}`,
+    "gi"
+  );
+  result = result.replace(injectionBlock, "");
+
+  // Refresh stale nonces so CSP header and inline tags always match.
+  result = result.replace(
+    /(<script\b[^>]*)\snonce="[^"]*"/gi,
+    `$1 nonce="${nonce}"`
+  );
+  result = result.replace(
+    /(<style\b[^>]*)\snonce="[^"]*"/gi,
+    `$1 nonce="${nonce}"`
+  );
+
+  const headBlock =
+    CSP_NONCE_START +
+    `<meta name="csp-nonce" content="${nonce}">` +
+    `<script nonce="${nonce}">${buildCspBootstrapScript(nonce)}</script>` +
+    CSP_NONCE_END;
+
+  result = result.replace(/<head([^>]*)>/i, `<head$1>${headBlock}`);
 
   result = result.replace(
     /<script(?![^>]*\bnonce=)/gi,
@@ -41,7 +103,7 @@ function injectHtmlNonces(html, nonce) {
   return result;
 }
 
-function buildContentSecurityPolicy(isProduction, nonce) {
+function buildContentSecurityPolicy(isProduction, nonce, req) {
   const sharedDirectives = [
     "default-src 'self' https://*.intellion.in",
     "base-uri 'self'",
@@ -50,12 +112,18 @@ function buildContentSecurityPolicy(isProduction, nonce) {
     "frame-ancestors 'none'",
     "img-src 'self' data: blob: https://*.intellion.in https://intellion.s3.ap-south-1.amazonaws.com https:",
     "font-src 'self' data: https://fonts.gstatic.com",
-    "connect-src 'self' https://webapi.intellion.in https://media.intellion.in https://intellion.s3.ap-south-1.amazonaws.com https://www.google-analytics.com https://analytics.google.com https://www.google.com https://www.googletagmanager.com https://region1.google-analytics.com https://maps.googleapis.com",
+    "connect-src 'self' https://webapi.intellion.in https://media.intellion.in https://intellion.s3.ap-south-1.amazonaws.com https://www.google-analytics.com https://analytics.google.com https://www.google.com https://www.googletagmanager.com https://region1.google-analytics.com https://stats.g.doubleclick.net https://maps.googleapis.com",
     "frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com https://www.google.com https://maps.google.com",
     "media-src 'self' https:"
   ];
 
   if (!isProduction) {
+    return null;
+  }
+
+  const host = req && req.headers.host ? req.headers.host.split(":")[0] : "";
+
+  if (isLocalDevHost(host)) {
     return null;
   }
 
@@ -70,9 +138,8 @@ function buildContentSecurityPolicy(isProduction, nonce) {
     ...sharedDirectives,
     `script-src-elem 'self' 'nonce-${nonce}' ${scriptHosts}`,
     `script-src 'self' 'nonce-${nonce}' ${scriptHosts}`,
-    "require-trusted-types-for 'script'",
     `style-src 'self' 'nonce-${nonce}' https://fonts.googleapis.com`,
-    "style-src-attr 'unsafe-hashes' 'sha256-biLFinpqYMtWHmXfkA1BPeCY0/fNt46SAZ+BBk5YUog=' 'sha256-0EZqoz+oBhx7gF4nvY2bSqoGyy4zLjNF+SDQXGp/ZrY=' 'sha256-aqNNdDLnnrDOnTNdkJpYlAxKVJtLt9CtFLklmInuUAE='",
+    `style-src-attr 'unsafe-hashes' ${STYLE_ATTR_HASHES.join(" ")}`,
     "upgrade-insecure-requests"
   ].join("; ");
 }
@@ -87,7 +154,7 @@ function applySecurityHeaders(res, isProduction, nonce, req) {
     "camera=(), microphone=(), geolocation=(), payment=()"
   );
 
-  const csp = buildContentSecurityPolicy(isProduction, nonce);
+  const csp = buildContentSecurityPolicy(isProduction, nonce, req);
 
   if (csp) {
     res.setHeader("Content-Security-Policy", csp);

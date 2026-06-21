@@ -152,12 +152,11 @@ export default {
     "~/server-middleware/force-www.js"
   ],
 
-  // ------------------ SSR CACHE ------------------
+  // SSR cache stores HTML bodies; per-request CSP nonces must be injected on
+  // every response, so page caching is disabled while strict CSP is enabled.
   cache: {
     useHostPrefix: false,
-    pages: [
-      /^\/$/
-    ],
+    pages: [],
     store: {
       type: "memory",
       max: 1000,

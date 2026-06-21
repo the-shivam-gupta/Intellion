@@ -21,6 +21,20 @@ function isHttpsRequest(req) {
   return !!(req.connection && req.connection.encrypted);
 }
 
+function isLocalDevHost(host) {
+  if (!host) {
+    return false;
+  }
+
+  const hostname = String(host).split(":")[0].toLowerCase();
+
+  return (
+    hostname === "localhost" ||
+    hostname.endsWith(".localhost") ||
+    /^(127\.|10\.|172\.(1[6-9]|2[0-9]|3[01])\.|192\.168\.|::1)/.test(hostname)
+  );
+}
+
 function shouldSendHsts(req) {
   return process.env.NODE_ENV === "production" && isHttpsRequest(req);
 }
@@ -28,5 +42,6 @@ function shouldSendHsts(req) {
 module.exports = {
   HSTS_VALUE,
   isHttpsRequest,
+  isLocalDevHost,
   shouldSendHsts
 };

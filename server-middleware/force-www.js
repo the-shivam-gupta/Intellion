@@ -1,5 +1,10 @@
 module.exports = function forceWww(req, res, next) {
-  const { HSTS_VALUE, isHttpsRequest, shouldSendHsts } = require("./security-constants");
+  const {
+    HSTS_VALUE,
+    isHttpsRequest,
+    isLocalDevHost,
+    shouldSendHsts
+  } = require("./security-constants");
   const rawHost = req.headers.host || "";
   const host = rawHost.split(":")[0];
   const url = req.url;
@@ -20,8 +25,8 @@ module.exports = function forceWww(req, res, next) {
     return next();
   }
 
-  // Skip redirect for local/private IPs (dev, staging, internal testing)
-  if (/^(127\.|10\.|172\.(1[6-9]|2[0-9]|3[01])\.|192\.168\.|::1)/.test(host)) {
+  // Skip redirect for local dev hosts (localhost, 127.0.0.1, private IPs).
+  if (isLocalDevHost(host)) {
     return next();
   }
 
