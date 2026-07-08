@@ -92,14 +92,20 @@
                         <div class="col-lg-12">
                           <div
                             class="form-group"
-                            :class="[{ 'error-box': errors.country !== null },{isIos: $device.isIos}]"
+                            :class="[{ 'error-box': errors.country !== null },{isIos: $device.isIos}, { 'has-country-value': countryLabel !== '' }]"
                           >
-                            <label class="form-dropdown-label">Country*</label>
+                            <label
+                              for="dropdown-country"
+                              :class="{active: isHighlight === 'country' || countryLabel !== ''}"
+                              @click="focusCountryDropdown"
+                            >COUNTRY*</label>
                             <b-dropdown
                               split
                               id="dropdown-country"
                               :text="countryLabel"
                               class="ta__dropdown"
+                              @show="isHighlight = 'country'"
+                              @hidden="isHighlight = false"
                             >
                               <b-dropdown-item
                                 v-for="(country,index) in countries"
@@ -454,6 +460,14 @@ export default {
     setCountryLabel(arg) {
       this.countryLabel = arg.label;
       this.contactForm.country = arg.label;
+    },
+    focusCountryDropdown() {
+      const dropdown = document.getElementById("dropdown-country");
+      const button = dropdown && dropdown.querySelector(".btn-secondary");
+      if (button) {
+        button.focus();
+        button.click();
+      }
     },
   },
   mounted() {

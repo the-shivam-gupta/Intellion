@@ -80,10 +80,21 @@
       <div class="col-lg-12" v-if="from === 'enquire'">
         <div
           class="form-group"
-          :class="[{ 'error-box': errors.city !== null },{isIos: $device.isIos}]"
+          :class="[{ 'error-box': errors.city !== null },{isIos: $device.isIos}, { 'has-city-value': cityLabel !== '' }]"
         >
-          <label class="form-dropdown-label">Select City*</label>
-          <b-dropdown split id="dropdown-city" :text="cityLabel" class="ta__dropdown">
+          <label
+            for="dropdown-city"
+            :class="{active: isHighlight === 'city' || cityLabel !== ''}"
+            @click="focusDropdown('dropdown-city')"
+          >SELECT CITY*</label>
+          <b-dropdown
+            split
+            id="dropdown-city"
+            :text="cityLabel"
+            class="ta__dropdown"
+            @show="isHighlight = 'city'"
+            @hidden="isHighlight = false"
+          >
             <b-dropdown-item
               v-for="(city,index) in cities"
               :key="'city-'+index"
@@ -98,14 +109,20 @@
       <div class="col-lg-12" v-if="from === 'enquire'">
         <div
           class="form-group"
-          :class="[{ 'error-box': errors.project !== null },{isIos: $device.isIos}]"
+          :class="[{ 'error-box': errors.project !== null },{isIos: $device.isIos}, { 'has-project-value': projectLabel !== '' }]"
         >
-          <label class="form-dropdown-label">Project Interested*</label>
+          <label
+            for="dropdown-project"
+            :class="{active: isHighlight === 'project' || projectLabel !== ''}"
+            @click="focusDropdown('dropdown-project')"
+          >PROJECT INTERESTED*</label>
           <b-dropdown
             split
             id="dropdown-project"
             class="ta__dropdown"
             :key="'project-' + enquireForm.city"
+            @show="isHighlight = 'project'"
+            @hidden="isHighlight = false"
           >
             <template #button-content>{{ projectLabel }}</template>
             <b-dropdown-item
@@ -404,6 +421,14 @@ export default {
     setProjectLabel(arg) {
       this.projectLabel = arg.label;
       this.enquireForm.project = arg.value;
+    },
+    focusDropdown(id) {
+      const dropdown = document.getElementById(id);
+      const button = dropdown && dropdown.querySelector(".btn-secondary");
+      if (button) {
+        button.focus();
+        button.click();
+      }
     },
   },
 };

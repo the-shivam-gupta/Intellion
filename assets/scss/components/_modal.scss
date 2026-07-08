@@ -453,10 +453,31 @@
         width: 100%;
       }
 
+      .form-group {
+        label[for="dropdown-city"],
+        label[for="dropdown-project"] {
+          z-index: 2;
+          pointer-events: none;
+
+          &:not(.active) {
+            pointer-events: auto;
+          }
+        }
+
+        &:not(.has-city-value) #dropdown-city .btn-secondary {
+          color: transparent !important;
+        }
+
+        &:not(.has-project-value) #dropdown-project .btn-secondary {
+          color: transparent !important;
+        }
+      }
+
       .ta__dropdown {
         max-width: 100%;
         border: none;
         border-bottom: 1px solid $pinkish-grey;
+        border-radius: 0 !important;
         padding: 0;
 
         .dropdown-menu {

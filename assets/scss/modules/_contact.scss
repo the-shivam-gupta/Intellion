@@ -128,10 +128,26 @@
         }
       }
 
+      .form-group {
+        label[for="dropdown-country"] {
+          z-index: 2;
+          pointer-events: none;
+
+          &:not(.active) {
+            pointer-events: auto;
+          }
+        }
+
+        &:not(.has-country-value) #dropdown-country .btn-secondary {
+          color: transparent !important;
+        }
+      }
+
       #dropdown-country {
         max-width: 100%;
         border: none;
         border-bottom: 1px solid $pinkish-grey;
+        border-radius: 0 !important;
         padding: 0;
 
         .dropdown-menu {
@@ -262,4 +278,9 @@
   }
 
 
+}
+
+#dropdown-city ul {
+  background: #fff !important;
+  z-index: 9;
 }
